@@ -6,191 +6,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Stackd — Build a stunning link-in-bio page in 60 seconds. Free forever.">
   <meta name="theme-color" content="#0D0D0D">
-
-  <!-- Open Graph (for social sharing previews) -->
-
-  <meta property="og:title"       content="Stackd — Your Links. Your Vibe.">
+  <meta property="og:title" content="Stackd — Your Links. Your Vibe.">
   <meta property="og:description" content="Build a stunning bio page in 60 seconds. Share everything with one link.">
-  <meta property="og:url"         content="https://stackd.bio">
-  <meta property="og:type"        content="website">
-
+  <meta property="og:url" content="https://stackd.bio">
   <title>Stackd — Your Links. Your Vibe.</title>
-
-  <!-- Stylesheets -->
-
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/builder.css">
-
-  <!-- Supabase CDN (loaded before our JS modules) -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
 <body>
 
-<!-- ── NAVIGATION ──────────────────────────────────────────── -->
+<!-- NAV -->
 
 <nav class="nav">
   <div class="nav-logo">Stackd</div>
   <div class="nav-right">
-    <!-- Shown when logged OUT -->
-    <button id="nav-login-btn" class="btn btn-ghost btn-sm"
-      onclick="openModal('auth-modal')">Log in</button>
-
-```
-<!-- Shown when logged IN (hidden by default) -->
-<div id="nav-user-menu" class="hidden flex items-center gap-1">
-  <span id="nav-user-email" class="text-xs text-muted"></span>
-  <button class="btn btn-ghost btn-sm" onclick="logOut()">Out</button>
-</div>
-
-<a href="#pricing" class="btn btn-grad btn-sm">Pro ✦</a>
-```
-
+    <button id="nav-login-btn" class="btn btn-ghost btn-sm" onclick="openAuthModal()">Log in</button>
+    <div id="nav-user-menu" class="hidden" style="display:none;align-items:center;gap:.5rem;">
+      <span id="nav-user-email" class="text-xs text-muted"></span>
+      <button class="btn btn-ghost btn-sm" onclick="logOut()">Out</button>
+    </div>
+    <a href="#pricing" class="btn btn-grad btn-sm">Pro ✦</a>
   </div>
 </nav>
 
-<!-- ── HERO ─────────────────────────────────────────────────── -->
+<!-- HERO -->
 
-<section class="hero" style="padding:88px 1.25rem 2.5rem;text-align:center;position:relative;overflow:hidden;">
-  <!-- Background glow -->
-  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:400px;height:260px;background:radial-gradient(ellipse,rgba(168,85,247,.22) 0%,transparent 70%);pointer-events:none;"></div>
-
-  <div class="badge badge-accent" style="margin-bottom:1.4rem;">✦ Free · No signup needed</div>
-
-  <h1>Your links.<br><span class="grad-text">Your vibe.</span></h1>
-
-  <p style="color:var(--text-muted);font-size:.95rem;line-height:1.65;max-width:300px;margin:1rem auto 2rem;">
-    Build a stunning bio page in 60 seconds. Share everything with one link.
-  </p>
-
-  <div style="display:flex;flex-direction:column;gap:.75rem;max-width:300px;margin:0 auto 2rem;">
-    <a href="#builder" class="btn btn-grad btn-lg">Build My Page Free →</a>
-    <a href="#pricing" class="btn btn-outline btn-lg">See Pro Plans</a>
-  </div>
-
-  <!-- Social proof -->
-
-  <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:2.5rem;">
-    <div style="display:flex;">
-      <div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);margin-left:0;background:linear-gradient(135deg,#A855F7,#EC4899);display:flex;align-items:center;justify-content:center;font-size:.75rem;">😎</div>
-      <div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);margin-left:-7px;background:linear-gradient(135deg,#6366F1,#A855F7);display:flex;align-items:center;justify-content:center;font-size:.75rem;">🎵</div>
-      <div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);margin-left:-7px;background:linear-gradient(135deg,#EC4899,#F97316);display:flex;align-items:center;justify-content:center;font-size:.75rem;">🔥</div>
-      <div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);margin-left:-7px;background:linear-gradient(135deg,#22C55E,#6366F1);display:flex;align-items:center;justify-content:center;font-size:.75rem;">🌟</div>
+<section style="padding:88px 1.25rem 2.5rem;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:340px;height:240px;background:radial-gradient(ellipse,rgba(168,85,247,.2) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
+  <div style="position:relative;z-index:1;">
+    <div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.28);color:#C084FC;border-radius:100px;padding:.3rem .9rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.4rem;">✦ Free · No signup needed</div>
+    <h1 style="font-size:clamp(2.4rem,9vw,3.6rem);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:1rem;">Your links.<br><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Your vibe.</span></h1>
+    <p style="color:#888;font-size:.95rem;line-height:1.65;max-width:300px;margin:0 auto 2rem;">Build a stunning bio page in 60 seconds. Share everything with one link.</p>
+    <div style="display:flex;flex-direction:column;gap:.75rem;max-width:300px;margin:0 auto 2rem;">
+      <a href="#builder" class="btn btn-grad btn-lg">Build My Page Free →</a>
+      <a href="#pricing" class="btn btn-outline btn-lg">See Pro Plans</a>
     </div>
-    <p class="text-sm text-muted"><strong style="color:var(--text)">50,000+</strong> pages created</p>
-  </div>
-
-  <!-- Phone mockup -->
-
-  <div style="width:230px;margin:0 auto;background:var(--surface);border-radius:34px;border:1.5px solid rgba(255,255,255,.1);padding:14px 13px 22px;box-shadow:0 32px 80px rgba(0,0,0,.55);">
-    <div style="width:68px;height:18px;background:#000;border-radius:100px;margin:0 auto 16px;"></div>
-    <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🌟</div>
-    <div style="text-align:center;font-weight:800;font-size:.95rem;margin-bottom:3px;">@yourname</div>
-    <div style="text-align:center;font-size:.68rem;color:var(--text-muted);margin:0 8px 14px;">Creator · Maker · Dreamer ✨</div>
-    <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.35);margin-bottom:7px;font-size:.72rem;font-weight:700;">
-      <span>🎵</span><span style="flex:1">New Music Out Now</span><span style="color:var(--text-muted)">→</span>
+    <div style="display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:2.5rem;">
+      <div style="display:flex;">
+        <div style="width:28px;height:28px;border-radius:50%;border:2px solid #0D0D0D;background:linear-gradient(135deg,#A855F7,#EC4899);display:flex;align-items:center;justify-content:center;font-size:.75rem;">😎</div>
+        <div style="width:28px;height:28px;border-radius:50%;border:2px solid #0D0D0D;margin-left:-7px;background:linear-gradient(135deg,#6366F1,#A855F7);display:flex;align-items:center;justify-content:center;font-size:.75rem;">🎵</div>
+        <div style="width:28px;height:28px;border-radius:50%;border:2px solid #0D0D0D;margin-left:-7px;background:linear-gradient(135deg,#EC4899,#F97316);display:flex;align-items:center;justify-content:center;font-size:.75rem;">🔥</div>
+        <div style="width:28px;height:28px;border-radius:50%;border:2px solid #0D0D0D;margin-left:-7px;background:linear-gradient(135deg,#22C55E,#6366F1);display:flex;align-items:center;justify-content:center;font-size:.75rem;">🌟</div>
+      </div>
+      <p style="font-size:.8rem;color:#888;"><strong style="color:#fff;">50,000+</strong> pages created</p>
     </div>
-    <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border);margin-bottom:7px;font-size:.72rem;font-weight:700;">
-      <span>📸</span><span style="flex:1">Instagram</span><span style="color:var(--text-muted)">→</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border);font-size:.72rem;font-weight:700;">
-      <span>🛍️</span><span style="flex:1">My Shop</span><span style="color:var(--text-muted)">→</span>
+    <!-- Phone Mockup -->
+    <div style="width:220px;margin:0 auto;background:#181818;border-radius:32px;border:1.5px solid rgba(255,255,255,.1);padding:14px 12px 20px;box-shadow:0 32px 80px rgba(0,0,0,.55);">
+      <div style="width:64px;height:18px;background:#000;border-radius:100px;margin:0 auto 14px;"></div>
+      <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">🌟</div>
+      <div style="text-align:center;font-weight:800;font-size:.9rem;margin-bottom:3px;">@yourname</div>
+      <div style="text-align:center;font-size:.65rem;color:#888;margin:0 8px 12px;">Creator · Maker · Dreamer ✨</div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.35);margin-bottom:6px;font-size:.7rem;font-weight:700;"><span>🎵</span><span style="flex:1;">New Music Out Now</span><span style="color:#888;font-size:.62rem;">→</span></div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:#222;border:1px solid rgba(255,255,255,.08);margin-bottom:6px;font-size:.7rem;font-weight:700;"><span>📸</span><span style="flex:1;">Instagram</span><span style="color:#888;font-size:.62rem;">→</span></div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:#222;border:1px solid rgba(255,255,255,.08);font-size:.7rem;font-weight:700;"><span>🛍️</span><span style="flex:1;">My Shop</span><span style="color:#888;font-size:.62rem;">→</span></div>
     </div>
   </div>
 </section>
 
-<!-- ── AD SLOT 1 ─────────────────────────────────────────────── -->
+<!-- AD SLOT 1 -->
 
-<div style="margin:0 1.25rem 1rem;">
-  <div style="background:var(--surface);border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;color:var(--text-muted);">
-    <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;">Advertisement</div>
-    <!-- Replace with your AdSense code:
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX"
-      data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    -->
-    <span style="font-size:.75rem;opacity:.4;">[Google AdSense Banner — paste your code above]</span>
+<div style="margin:0 1.25rem 1.5rem;">
+  <div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;">
+    <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div>
+    <!-- ADSENSE: replace this comment block with your AdSense code -->
+    <span style="font-size:.72rem;color:#444;">[Google AdSense Banner]</span>
   </div>
 </div>
 
-<!-- ── BUILDER ───────────────────────────────────────────────── -->
+<!-- BUILDER -->
 
-<section id="builder" class="section" style="padding-top:2rem;">
-  <div class="eyebrow">✦ The Builder ✦</div>
-  <h2 style="text-align:center;margin-bottom:.5rem;">Make it yours</h2>
-  <p class="section-sub">No code. No friction. Just your links, your way.</p>
+<section id="builder" style="padding:0 1.25rem 2rem;">
+  <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ The Builder ✦</div>
+  <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Make it yours</h2>
+  <p style="text-align:center;color:#888;font-size:.9rem;line-height:1.6;margin:0 auto 2rem;max-width:280px;">No code. No friction. Just your links, your way.</p>
 
-  <!-- Tab wrapper -->
+  <!-- Builder Card -->
 
-  <div class="builder-wrap">
-    <!-- Tab bar -->
-    <div class="tab-bar" role="tablist">
-      <button class="tab-btn active" data-tab="profile" role="tab"
-        onclick="switchTab('profile')">
-        <span class="tab-icon">👤</span>Profile
-      </button>
-      <button class="tab-btn" data-tab="links" role="tab"
-        onclick="switchTab('links')">
-        <span class="tab-icon">🔗</span>
-        Links <span class="link-count" id="link-count"></span>
-      </button>
-      <button class="tab-btn" data-tab="theme" role="tab"
-        onclick="switchTab('theme')">
-        <span class="tab-icon">🎨</span>Theme
-      </button>
-      <button class="tab-btn" data-tab="publish" role="tab"
-        onclick="switchTab('publish')">
-        <span class="tab-icon">🚀</span>Publish
-      </button>
-    </div>
+  <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;overflow:hidden;margin-bottom:1rem;">
 
 ```
-<!-- Profile Tab -->
-<div class="tab-panel active" id="tab-profile" role="tabpanel">
-  <div class="field">
-    <label for="inp-name">Display Name</label>
-    <input type="text" id="inp-name" placeholder="e.g. Alex Rivera" autocomplete="name">
+<!-- Tab Bar -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(255,255,255,.08);">
+  <button class="tab-btn active" id="tbtn-profile" onclick="switchTab('profile')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid #A855F7;color:#A855F7;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+    <span style="font-size:1rem;">👤</span>Profile
+  </button>
+  <button class="tab-btn" id="tbtn-links" onclick="switchTab('links')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+    <span style="font-size:1rem;">🔗</span>Links
+  </button>
+  <button class="tab-btn" id="tbtn-theme" onclick="switchTab('theme')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+    <span style="font-size:1rem;">🎨</span>Theme
+  </button>
+  <button class="tab-btn" id="tbtn-publish" onclick="switchTab('publish')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+    <span style="font-size:1rem;">🚀</span>Publish
+  </button>
+</div>
+
+<!-- Profile Panel -->
+<div id="tab-profile" style="padding:1.25rem;display:block;">
+  <div style="margin-bottom:1rem;">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Display Name</label>
+    <input type="text" id="inp-name" value="Your Name" placeholder="e.g. Alex Rivera" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
   </div>
-  <div class="field">
-    <label for="inp-bio">Bio</label>
-    <textarea id="inp-bio" placeholder="Creator · Maker · Dreamer ✨"></textarea>
+  <div style="margin-bottom:1rem;">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Bio</label>
+    <textarea id="inp-bio" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;resize:none;height:72px;box-sizing:border-box;">Creator · Maker · Dreamer ✨</textarea>
   </div>
-  <div class="field">
-    <label for="inp-emoji">Avatar Emoji</label>
-    <input type="text" id="inp-emoji" maxlength="4"
-      style="font-size:1.2rem;text-align:center;" placeholder="🌟">
+  <div style="margin-bottom:1rem;">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Avatar Emoji</label>
+    <input type="text" id="inp-emoji" value="🌟" maxlength="4" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:1.3rem;text-align:center;outline:none;box-sizing:border-box;">
   </div>
-  <div class="field">
-    <label for="inp-username">Username</label>
-    <input type="text" id="inp-username" placeholder="yourname" autocomplete="username">
-    <div class="field-hint">Your page will be at stackd.bio/<span id="username-preview">yourname</span></div>
+  <div>
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Username</label>
+    <input type="text" id="inp-username" value="yourname" placeholder="yourname" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
+    <div style="font-size:.72rem;color:#888;margin-top:.3rem;">Your page will be at stackd.bio/<span id="username-preview">yourname</span></div>
   </div>
 </div>
 
-<!-- Links Tab -->
-<div class="tab-panel" id="tab-links" role="tabpanel">
+<!-- Links Panel -->
+<div id="tab-links" style="padding:1.25rem;display:none;">
   <div id="link-list"></div>
-  <button class="add-link-btn" onclick="addLink()">+ Add Link</button>
+  <button onclick="addLink()" style="width:100%;padding:.78rem;background:rgba(168,85,247,.06);border:1.5px dashed rgba(168,85,247,.28);border-radius:13px;color:#A855F7;font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:.5rem;">+ Add Link</button>
 </div>
 
-<!-- Theme Tab -->
-<div class="tab-panel" id="tab-theme" role="tabpanel">
-  <div class="field">
-    <label>Color Theme</label>
-    <div class="theme-grid" id="theme-grid"></div>
+<!-- Theme Panel -->
+<div id="tab-theme" style="padding:1.25rem;display:none;">
+  <div style="margin-bottom:1.2rem;">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.6rem;">Color Theme</label>
+    <div id="theme-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;"></div>
   </div>
-  <div class="field" style="margin-top:1.2rem;">
-    <label for="btn-style">Button Style</label>
-    <select id="btn-style">
+  <div style="margin-bottom:1rem;">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Button Style</label>
+    <select id="btn-style" onchange="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
       <option value="pill">Pill / Rounded</option>
       <option value="square">Sharp / Blocky</option>
       <option value="outline">Outline</option>
     </select>
   </div>
-  <div class="field">
-    <label for="bg-style">Background</label>
-    <select id="bg-style">
+  <div>
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Background</label>
+    <select id="bg-style" onchange="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
       <option value="dark">Dark</option>
       <option value="gradient">Gradient</option>
       <option value="light">Light</option>
@@ -198,24 +152,24 @@
   </div>
 </div>
 
-<!-- Publish Tab -->
-<div class="tab-panel" id="tab-publish" role="tabpanel">
-  <div class="publish-card">
-    <h3>🎉 Your Stackd page is ready</h3>
-    <p>Share this link everywhere — Instagram bio, TikTok, Twitter, email signatures.</p>
-    <div class="url-row">
-      <input type="text" id="page-url" readonly aria-label="Your page URL">
-      <button class="copy-btn" id="copy-btn">Copy</button>
+<!-- Publish Panel -->
+<div id="tab-publish" style="padding:1.25rem;display:none;">
+  <div style="background:linear-gradient(135deg,rgba(168,85,247,.1),rgba(236,72,153,.08));border:1px solid rgba(168,85,247,.22);border-radius:16px;padding:1.2rem;margin-bottom:1rem;">
+    <div style="font-size:.93rem;font-weight:800;margin-bottom:.35rem;">🎉 Your Stackd page is ready</div>
+    <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Share this link everywhere — Instagram bio, TikTok, Twitter, email signatures.</div>
+    <div style="display:flex;gap:.5rem;">
+      <input type="text" id="page-url" readonly style="flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.62rem .8rem;color:#fff;font-family:inherit;font-size:.76rem;outline:none;min-width:0;">
+      <button id="copy-btn" onclick="copyURL()" style="padding:.62rem 1rem;background:#A855F7;border:none;border-radius:10px;color:#fff;font-family:inherit;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;">Copy</button>
     </div>
-    <div class="share-row">
-      <button class="share-chip" data-share="instagram">📸 Instagram</button>
-      <button class="share-chip" data-share="tiktok">🎵 TikTok</button>
-      <button class="share-chip" data-share="twitter">🐦 Twitter</button>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem;">
+      <button onclick="showToast('Paste your link in your Instagram bio! 📸')" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">📸 Instagram</button>
+      <button onclick="showToast('Paste your link in your TikTok bio! 🎵')" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">🎵 TikTok</button>
+      <button onclick="shareTwitter()" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">🐦 Twitter</button>
     </div>
   </div>
-  <div class="upsell-box">
-    <h3>⚡ Want analytics + stackd.bio domain?</h3>
-    <p>Track who clicked, where they came from. Connect your custom domain on Pro.</p>
+  <div style="background:#222;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.2rem;">
+    <div style="font-size:.88rem;font-weight:800;margin-bottom:.35rem;">⚡ Want analytics + stackd.bio domain?</div>
+    <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Track who clicked and where they came from. Go Pro and connect your custom domain.</div>
     <a href="#pricing" class="btn btn-grad btn-lg" style="font-size:.85rem;padding:.75rem;">Upgrade to Pro →</a>
   </div>
 </div>
@@ -225,244 +179,443 @@
 
   <!-- Live Preview -->
 
-  <div class="preview-outer">
-    <div class="preview-header">
-      <span class="live-dot">Live Preview</span>
-      <button class="btn btn-grad btn-sm"
-        onclick="switchTab('publish')">Publish →</button>
+  <div style="border:1px solid rgba(255,255,255,.08);border-radius:22px;background:#0D0D0D;padding:1.25rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+      <div style="display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#888;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;display:inline-block;"></span>
+        Live Preview
+      </div>
+      <button onclick="switchTab('publish')" class="btn btn-grad btn-sm">Publish →</button>
     </div>
-    <div class="preview-phone-wrap">
-      <div class="preview-phone" id="preview-phone">
-        <div class="pp-avatar" id="pp-avatar">🌟</div>
-        <div class="pp-name"   id="pp-name">Your Name</div>
-        <div class="pp-bio"    id="pp-bio">Creator · Maker · Dreamer ✨</div>
+    <div style="display:flex;justify-content:center;">
+      <div id="preview-phone" style="width:200px;min-height:300px;border-radius:26px;padding:14px 12px 18px;border:1px solid rgba(255,255,255,.08);background:#181818;transition:background .3s;">
+        <div id="pp-avatar" style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🌟</div>
+        <div id="pp-name" style="text-align:center;font-weight:800;font-size:.85rem;margin-bottom:2px;color:#fff;">Your Name</div>
+        <div id="pp-bio" style="text-align:center;font-size:.64rem;color:rgba(255,255,255,.5);margin:0 5px 11px;line-height:1.4;">Creator · Maker · Dreamer ✨</div>
         <div id="pp-links"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FEATURES ──────────────────────────────────────────────── -->
+<!-- FEATURES -->
 
-<section id="features" class="section" style="padding:3rem 1.25rem;">
-  <div class="eyebrow">✦ Why Stackd ✦</div>
-  <h2 style="text-align:center;margin-bottom:.5rem;">Built for creators</h2>
-  <p class="section-sub">Everything you need to stand out.</p>
-
+<section style="padding:3rem 1.25rem;">
+  <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ Why Stackd ✦</div>
+  <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Built for creators</h2>
+  <p style="text-align:center;color:#888;font-size:.9rem;margin:0 auto 2rem;max-width:280px;line-height:1.6;">Everything you need to stand out online.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
-    <div class="card" style="grid-column:span 2;">
-      <div style="font-size:1.6rem;margin-bottom:.55rem;">⚡</div>
+    <div style="grid-column:span 2;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
+      <div style="font-size:1.5rem;margin-bottom:.5rem;">⚡</div>
       <div style="font-size:.88rem;font-weight:800;margin-bottom:.3rem;">Live in 60 seconds</div>
-      <div class="text-sm text-muted">No account needed. Build, copy your link, start sharing instantly.</div>
+      <div style="font-size:.76rem;color:#888;line-height:1.5;">No account needed. Build, copy your link, start sharing instantly.</div>
     </div>
-    <div class="card-sm">
-      <div style="font-size:1.4rem;margin-bottom:.5rem;">🎨</div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
+      <div style="font-size:1.4rem;margin-bottom:.45rem;">🎨</div>
       <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Bold themes</div>
-      <div class="text-xs text-muted">10 stunning themes that make your page pop.</div>
+      <div style="font-size:.72rem;color:#888;line-height:1.5;">10 stunning themes that make your page pop.</div>
     </div>
-    <div class="card-sm">
-      <div style="font-size:1.4rem;margin-bottom:.5rem;">📱</div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
+      <div style="font-size:1.4rem;margin-bottom:.45rem;">📱</div>
       <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Mobile first</div>
-      <div class="text-xs text-muted">Looks perfect on every phone, every time.</div>
+      <div style="font-size:.72rem;color:#888;line-height:1.5;">Looks perfect on every phone, every time.</div>
     </div>
-    <div class="card-sm">
-      <div style="font-size:1.4rem;margin-bottom:.5rem;">📊</div>
-      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Analytics <span class="badge badge-pro" style="vertical-align:middle;">Pro</span></div>
-      <div class="text-xs text-muted">Track clicks and traffic sources in real time.</div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
+      <div style="font-size:1.4rem;margin-bottom:.45rem;">📊</div>
+      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Analytics <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div>
+      <div style="font-size:.72rem;color:#888;line-height:1.5;">Track clicks and traffic sources in real time.</div>
     </div>
-    <div class="card-sm">
-      <div style="font-size:1.4rem;margin-bottom:.5rem;">🌐</div>
-      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Custom domain <span class="badge badge-pro" style="vertical-align:middle;">Pro</span></div>
-      <div class="text-xs text-muted">Connect stackd.bio or your own domain.</div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
+      <div style="font-size:1.4rem;margin-bottom:.45rem;">🌐</div>
+      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Custom domain <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div>
+      <div style="font-size:.72rem;color:#888;line-height:1.5;">Connect stackd.bio or your own domain.</div>
     </div>
   </div>
 </section>
 
-<!-- ── AD SLOT 2 ─────────────────────────────────────────────── -->
+<!-- AD SLOT 2 -->
 
-<div style="margin:0 1.25rem 1rem;">
-  <div style="background:var(--surface);border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;color:var(--text-muted);">
-    <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;">Advertisement</div>
-    <!-- Replace with AdSense rectangle code -->
-    <span style="font-size:.75rem;opacity:.4;">[Google AdSense Rectangle — paste your code above]</span>
+<div style="margin:0 1.25rem 1.5rem;">
+  <div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;">
+    <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div>
+    <!-- ADSENSE: replace this comment with your AdSense code -->
+    <span style="font-size:.72rem;color:#444;">[Google AdSense Rectangle]</span>
   </div>
 </div>
 
-<!-- ── PRICING ───────────────────────────────────────────────── -->
+<!-- PRICING -->
 
-<section id="pricing" class="section">
-  <div class="eyebrow">✦ Pricing ✦</div>
-  <h2 style="text-align:center;margin-bottom:.5rem;">Simple pricing</h2>
-  <p class="section-sub">Free forever for the basics. Upgrade when you're ready to grow.</p>
+<section id="pricing" style="padding:3rem 1.25rem;">
+  <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ Pricing ✦</div>
+  <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Simple pricing</h2>
+  <p style="text-align:center;color:#888;font-size:.9rem;margin:0 auto 2rem;max-width:280px;line-height:1.6;">Free forever for the basics. Upgrade when you're ready.</p>
 
-  <!-- Free Plan -->
+  <!-- Free -->
 
-  <div class="card" style="margin-bottom:1rem;">
-    <div style="font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Free</div>
-    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;">$0 <small style="font-size:.85rem;font-weight:400;color:var(--text-muted);letter-spacing:0;">/ forever</small></div>
+  <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:1.5rem;margin-bottom:1rem;">
+    <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Free</div>
+    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;">$0 <small style="font-size:.85rem;font-weight:400;color:#888;letter-spacing:0;">/ forever</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>5 links</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>3 color themes</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Stackd subdomain</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);opacity:.45;"><span style="color:#444;font-weight:800;">✕</span>Analytics</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);opacity:.45;"><span style="color:#444;font-weight:800;">✕</span>Custom domain</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;align-items:center;color:var(--text-muted);opacity:.45;"><span style="color:#444;font-weight:800;">✕</span>Remove branding</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>5 links</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>3 color themes</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Stackd subdomain</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Analytics</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Custom domain</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Remove branding</li>
     </ul>
     <a href="#builder" class="btn btn-outline btn-lg" style="display:flex;">Start Building Free</a>
   </div>
 
-  <!-- Pro Plan -->
+  <!-- Pro -->
 
-  <div class="card" style="margin-bottom:1rem;border-color:var(--accent);box-shadow:0 0 0 1px rgba(168,85,247,.18),0 20px 60px rgba(168,85,247,.1);position:relative;overflow:hidden;">
-    <div style="position:absolute;top:0;right:0;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.62rem;font-weight:800;letter-spacing:.08em;padding:.3rem .9rem;border-bottom-left-radius:12px;text-transform:uppercase;">Most Popular</div>
-    <div style="font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Pro</div>
-    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;font-weight:600;vertical-align:super;letter-spacing:0;">$</sup>5 <small style="font-size:.85rem;font-weight:400;color:var(--text-muted);letter-spacing:0;">/ month</small></div>
+  <div style="background:#181818;border:1px solid #A855F7;border-radius:22px;padding:1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(168,85,247,.12);">
+    <div style="position:absolute;top:0;right:0;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.62rem;font-weight:800;padding:.3rem .9rem;border-bottom-left-radius:12px;text-transform:uppercase;letter-spacing:.08em;">Most Popular</div>
+    <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Pro</div>
+    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;letter-spacing:0;">$</sup>5 <small style="font-size:.85rem;font-weight:400;color:#888;letter-spacing:0;">/ month</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Unlimited links</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>All 10 themes + custom colors</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Analytics dashboard</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Custom domain</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Remove Stackd branding</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Priority support</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Unlimited links</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>All 10 themes + custom</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Analytics dashboard</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Custom domain</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Remove branding</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Priority support</li>
     </ul>
-    <button class="btn btn-grad btn-lg" id="upgrade-pro-btn">Upgrade to Pro ✦</button>
+    <button class="btn btn-grad btn-lg" onclick="showToast('Pro launching soon — join waitlist! 🎉')">Upgrade to Pro ✦</button>
   </div>
 
-  <!-- Business Plan -->
+  <!-- Business -->
 
-  <div class="card">
-    <div style="font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Business</div>
-    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;font-weight:600;vertical-align:super;letter-spacing:0;">$</sup>19 <small style="font-size:.85rem;font-weight:400;color:var(--text-muted);letter-spacing:0;">/ month</small></div>
+  <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:1.5rem;">
+    <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Business</div>
+    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;letter-spacing:0;">$</sup>19 <small style="font-size:.85rem;font-weight:400;color:#888;letter-spacing:0;">/ month</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Everything in Pro</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>5 team seats</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>API access</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid var(--border);display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>White-label option</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;align-items:center;color:var(--text-muted);"><span style="color:#22C55E;font-weight:800;">✓</span>Dedicated support</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Everything in Pro</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>5 team seats</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>API access</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>White-label option</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Dedicated support</li>
     </ul>
-    <button class="btn btn-outline btn-lg" id="upgrade-business-btn">Contact Sales</button>
+    <button class="btn btn-outline btn-lg" onclick="showToast('Contact us: hello@stackd.bio')">Contact Sales</button>
   </div>
 </section>
 
-<div class="divider"></div>
+<div style="height:1px;background:rgba(255,255,255,.08);margin:0 1.25rem;"></div>
 
-<!-- ── AFFILIATE ──────────────────────────────────────────────── -->
+<!-- AFFILIATE -->
 
-<section id="affiliate" class="section">
-  <div class="card-accent" style="text-align:center;">
-    <h2 style="margin-bottom:.6rem;">Earn with Stackd 💸</h2>
-    <p class="text-muted" style="font-size:.88rem;max-width:290px;margin:.6rem auto 1.75rem;line-height:1.6;">
-      Share Stackd and earn 30% recurring commission on every Pro subscriber. Forever.
-    </p>
+<section style="padding:3rem 1.25rem;">
+  <div style="background:linear-gradient(135deg,rgba(236,72,153,.09),rgba(168,85,247,.09));border:1px solid rgba(236,72,153,.18);border-radius:22px;padding:2rem 1.25rem;text-align:center;">
+    <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;margin-bottom:.6rem;">Earn with Stackd 💸</h2>
+    <p style="color:#888;font-size:.88rem;max-width:280px;margin:.6rem auto 1.75rem;line-height:1.6;">Share Stackd and earn 30% recurring commission on every Pro subscriber. Forever.</p>
     <div style="display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;margin-bottom:1.75rem;">
-      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;text-align:center;">
-        <div class="grad-text" style="font-size:1.5rem;font-weight:800;">1</div>
-        <div class="text-xs text-muted" style="margin-top:3px;">Get your link</div>
+      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;">
+        <div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">1</div>
+        <div style="font-size:.68rem;color:#888;margin-top:3px;">Get your link</div>
       </div>
-      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;text-align:center;">
-        <div class="grad-text" style="font-size:1.5rem;font-weight:800;">2</div>
-        <div class="text-xs text-muted" style="margin-top:3px;">Share it</div>
+      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;">
+        <div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">2</div>
+        <div style="font-size:.68rem;color:#888;margin-top:3px;">Share it</div>
       </div>
-      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;text-align:center;">
-        <div class="grad-text" style="font-size:1.5rem;font-weight:800;">30%</div>
-        <div class="text-xs text-muted" style="margin-top:3px;">Earn forever</div>
+      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;">
+        <div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">30%</div>
+        <div style="font-size:.68rem;color:#888;margin-top:3px;">Earn forever</div>
       </div>
     </div>
-    <button class="btn btn-grad" id="affiliate-btn"
-      style="font-size:.9rem;padding:.8rem 2rem;border-radius:100px;">
-      Join Affiliate Program →
-    </button>
-    <p style="margin-top:1rem;font-size:.72rem;color:var(--text-muted);">
-      Paid monthly via PayPal or Stripe. No cap on earnings.
-    </p>
+    <button class="btn btn-grad" style="font-size:.9rem;padding:.8rem 2rem;border-radius:100px;" onclick="showToast('Affiliate program launching soon! 🎉')">Join Affiliate Program →</button>
+    <p style="margin-top:1rem;font-size:.72rem;color:#888;">Paid monthly via PayPal or Stripe. No cap on earnings.</p>
   </div>
 </section>
 
-<div class="divider"></div>
+<div style="height:1px;background:rgba(255,255,255,.08);margin:0 1.25rem;"></div>
 
-<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<!-- FOOTER -->
 
-<footer class="footer">
-  <div class="footer-logo">Stackd</div>
-  <p>Built on GitHub + Cloudflare Pages · Free forever for the basics</p>
-  <div class="footer-links">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#affiliate">Affiliate</a>
-    <a href="#">Contact</a>
+<footer style="padding:1.5rem 1.25rem;text-align:center;">
+  <div style="font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.65rem;">Stackd</div>
+  <p style="font-size:.75rem;color:#888;margin-bottom:.65rem;">Built on GitHub + Cloudflare Pages · Free forever for the basics</p>
+  <div style="display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
+    <a href="#" style="font-size:.75rem;color:#888;text-decoration:none;">Privacy</a>
+    <a href="#" style="font-size:.75rem;color:#888;text-decoration:none;">Terms</a>
+    <a href="#affiliate" style="font-size:.75rem;color:#888;text-decoration:none;">Affiliate</a>
+    <a href="mailto:hello@stackd.bio" style="font-size:.75rem;color:#888;text-decoration:none;">Contact</a>
   </div>
 </footer>
 
-<!-- ── AUTH MODAL ─────────────────────────────────────────────── -->
+<!-- AUTH MODAL -->
 
-<div class="modal-overlay" id="auth-modal" onclick="if(event.target===this) closeModal('auth-modal')">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <div class="modal-title" id="auth-mode-label">Log In</div>
-    <form id="auth-form">
-      <div class="field">
-        <label for="auth-email">Email</label>
-        <input type="email" id="auth-email" placeholder="you@example.com" autocomplete="email" required>
+<div id="auth-modal" onclick="if(event.target===this)closeAuthModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:500;align-items:flex-end;justify-content:center;">
+  <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px 22px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;">
+    <div style="width:36px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:0 auto 1.5rem;"></div>
+    <div style="font-weight:800;font-size:1.1rem;margin-bottom:1rem;" id="auth-title">Log In</div>
+    <form id="auth-form" onsubmit="handleAuth(event)">
+      <div style="margin-bottom:1rem;">
+        <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Email</label>
+        <input type="email" id="auth-email" placeholder="you@example.com" required style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
       </div>
-      <div class="field">
-        <label for="auth-password">Password</label>
-        <input type="password" id="auth-password" placeholder="8+ characters" autocomplete="current-password" required>
+      <div style="margin-bottom:1rem;">
+        <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Password</label>
+        <input type="password" id="auth-password" placeholder="8+ characters" required style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
       </div>
-      <button type="submit" class="btn btn-grad btn-lg" id="auth-submit-btn" style="margin-top:.5rem;">Log In</button>
+      <button type="submit" id="auth-submit" class="btn btn-grad btn-lg" style="margin-top:.5rem;">Log In</button>
     </form>
-    <button class="btn btn-ghost btn-lg" id="auth-toggle-btn"
-      style="margin-top:.75rem;font-size:.82rem;color:var(--text-muted);">
-      Don't have an account? Sign up
-    </button>
+    <button onclick="toggleAuthMode()" id="auth-toggle" style="width:100%;margin-top:.75rem;padding:.75rem;background:none;border:none;color:#888;font-family:inherit;font-size:.82rem;cursor:pointer;">Don't have an account? Sign up</button>
   </div>
 </div>
 
-<!-- ── TOAST ──────────────────────────────────────────────────── -->
+<!-- TOAST -->
 
-<div id="toast" role="alert" aria-live="polite"></div>
+<div id="toast" style="position:fixed;bottom:calc(1.5rem + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(80px);background:#fff;color:#000;font-family:inherit;font-weight:700;font-size:.85rem;padding:.72rem 1.4rem;border-radius:100px;opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4);pointer-events:none;"></div>
 
-<!-- ── SCRIPTS ────────────────────────────────────────────────── -->
+<!-- SCRIPTS — plain script tag, no modules, works everywhere -->
 
-<!-- Use type="module" so we can use import/export in JS files -->
+<script>
+// ── THEMES ──────────────────────────────────────────────────
+const THEMES = [
+  { id:'purple', bg:'#0D0D0D', accent:'#A855F7', text:'#FFF', grad:'135deg,#A855F7,#EC4899' },
+  { id:'cyan',   bg:'#020F12', accent:'#06B6D4', text:'#F0FFFE', grad:'135deg,#06B6D4,#6366F1' },
+  { id:'lime',   bg:'#080C00', accent:'#84CC16', text:'#F7FFE0', grad:'135deg,#84CC16,#22C55E' },
+  { id:'rose',   bg:'#0F0508', accent:'#F43F5E', text:'#FFF0F3', grad:'135deg,#F43F5E,#FB923C' },
+  { id:'indigo', bg:'#06060F', accent:'#6366F1', text:'#F0F0FF', grad:'135deg,#6366F1,#A855F7' },
+  { id:'amber',  bg:'#0C0800', accent:'#F59E0B', text:'#FFFBEB', grad:'135deg,#F59E0B,#EF4444' },
+  { id:'teal',   bg:'#00080A', accent:'#14B8A6', text:'#F0FFFD', grad:'135deg,#14B8A6,#6366F1' },
+  { id:'pink',   bg:'#0F0008', accent:'#EC4899', text:'#FFF0F8', grad:'135deg,#EC4899,#A855F7' },
+  { id:'orange', bg:'#0C0400', accent:'#F97316', text:'#FFF7F0', grad:'135deg,#F97316,#EAB308' },
+  { id:'white',  bg:'#F5F5F5', accent:'#6366F1', text:'#111',   grad:'135deg,#6366F1,#A855F7' },
+];
+let activeTheme = 0;
 
-<script type="module" src="js/app.js"></script>
+// ── STATE ───────────────────────────────────────────────────
+const FREE_LIMIT = 5;
+let isPro = false;
+let links = [
+  { emoji:'📸', label:'Instagram', url:'https://instagram.com' },
+  { emoji:'🎵', label:'My Music',  url:'https://spotify.com' },
+  { emoji:'🛍️', label:'Shop',      url:'https://yourshop.com' },
+];
 
-<script type="module">
-  import { initSupabase, watchAuthState, updateNavForUser, bindAuthForm, logOut } from './js/auth.js';
-  import { openModal, closeModal } from './js/utils.js';
+// ── TABS ────────────────────────────────────────────────────
+function switchTab(name) {
+  var panels = ['profile','links','theme','publish'];
+  panels.forEach(function(p) {
+    var panel = document.getElementById('tab-' + p);
+    var btn   = document.getElementById('tbtn-' + p);
+    if (!panel || !btn) return;
+    if (p === name) {
+      panel.style.display = 'block';
+      btn.style.color = '#A855F7';
+      btn.style.borderBottom = '2px solid #A855F7';
+    } else {
+      panel.style.display = 'none';
+      btn.style.color = '#888';
+      btn.style.borderBottom = '2px solid transparent';
+    }
+  });
+}
 
-  // Make modal functions globally accessible for onclick attributes
-  window.openModal  = openModal;
-  window.closeModal = closeModal;
-  window.logOut     = logOut;
+// ── THEME GRID ──────────────────────────────────────────────
+function buildThemeGrid() {
+  var grid = document.getElementById('theme-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  THEMES.forEach(function(t, i) {
+    var d = document.createElement('div');
+    d.style.cssText = 'height:40px;border-radius:11px;cursor:pointer;border:2px solid ' + (i===0?'#fff':'transparent') + ';transition:all .2s;position:relative;overflow:hidden;background:linear-gradient(' + t.grad + ');';
+    d.title = t.id;
+    if (i === 0) d.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>';
+    (function(idx){ d.onclick = function(){ setTheme(idx); }; })(i);
+    grid.appendChild(d);
+  });
+}
 
-  // Initialize auth (safe to call even if keys aren't set yet)
-  initSupabase();
-  bindAuthForm();
+function setTheme(i) {
+  activeTheme = i;
+  var swatches = document.getElementById('theme-grid').children;
+  for (var j = 0; j < swatches.length; j++) {
+    swatches[j].style.border = j === i ? '2px solid #fff' : '2px solid transparent';
+    swatches[j].innerHTML = j === i ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>' : '';
+  }
+  updatePreview();
+}
 
-  // Watch for login/logout changes
-  watchAuthState((event, session) => {
-    updateNavForUser(session?.user || null);
+// ── LINK LIST ───────────────────────────────────────────────
+function renderLinks() {
+  var list = document.getElementById('link-list');
+  if (!list) return;
+  list.innerHTML = '';
+  links.forEach(function(link, i) {
+    var card = document.createElement('div');
+    card.style.cssText = 'background:#2A2A2A;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:.9rem;margin-bottom:.75rem;position:relative;';
+    card.innerHTML =
+      '<button onclick="removeLink(' + i + ')" style="position:absolute;top:.7rem;right:.7rem;width:26px;height:26px;border-radius:7px;background:rgba(239,68,68,.12);border:none;color:#EF4444;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>' +
+      '<div style="display:flex;gap:.5rem;margin-bottom:.5rem;">' +
+        '<input type="text" value="' + link.emoji + '" maxlength="4" data-i="' + i + '" data-f="emoji" style="width:52px;text-align:center;font-size:1.1rem;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .4rem;color:#fff;font-family:inherit;outline:none;flex:none;">' +
+        '<input type="text" value="' + link.label + '" data-i="' + i + '" data-f="label" placeholder="Link title" style="flex:1;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;min-width:0;">' +
+      '</div>' +
+      '<input type="url" value="' + link.url + '" data-i="' + i + '" data-f="url" placeholder="https://..." style="width:100%;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;box-sizing:border-box;">';
+    list.appendChild(card);
   });
 
-  // Pricing buttons
-  document.getElementById('upgrade-pro-btn')?.addEventListener('click', () => {
-    const msg = 'Pro payments coming soon! Join the waitlist 🎉';
-    document.getElementById('toast').textContent = msg;
-    document.getElementById('toast').className = 'show toast-success';
-    setTimeout(() => document.getElementById('toast').className = '', 3000);
+  // Bind inputs
+  list.querySelectorAll('input[data-i]').forEach(function(inp) {
+    inp.oninput = function() {
+      var idx   = parseInt(inp.dataset.i);
+      var field = inp.dataset.f;
+      links[idx][field] = inp.value;
+      updatePreview();
+    };
   });
 
-  document.getElementById('upgrade-business-btn')?.addEventListener('click', () => {
-    window.location.href = 'mailto:hello@stackd.bio?subject=Business Plan Inquiry';
+  updatePreview();
+}
+
+function addLink() {
+  if (!isPro && links.length >= FREE_LIMIT) {
+    showToast('Free plan: ' + FREE_LIMIT + ' links max. Upgrade to Pro for unlimited! ✦');
+    return;
+  }
+  links.push({ emoji:'✨', label:'New Link', url:'https://' });
+  renderLinks();
+}
+
+function removeLink(i) {
+  links.splice(i, 1);
+  renderLinks();
+}
+
+// ── LIVE PREVIEW ────────────────────────────────────────────
+function updatePreview() {
+  var t        = THEMES[activeTheme];
+  var name     = document.getElementById('inp-name')     ? document.getElementById('inp-name').value     : 'Your Name';
+  var bio      = document.getElementById('inp-bio')      ? document.getElementById('inp-bio').value      : '';
+  var emoji    = document.getElementById('inp-emoji')    ? document.getElementById('inp-emoji').value    : '🌟';
+  var username = document.getElementById('inp-username') ? document.getElementById('inp-username').value : 'yourname';
+  var btnStyle = document.getElementById('btn-style')    ? document.getElementById('btn-style').value    : 'pill';
+  var bgStyle  = document.getElementById('bg-style')     ? document.getElementById('bg-style').value     : 'dark';
+
+  // Update username hint
+  var hint = document.getElementById('username-preview');
+  if (hint) hint.textContent = username || 'yourname';
+
+  // Phone background
+  var phone = document.getElementById('preview-phone');
+  if (!phone) return;
+  var bg = t.bg;
+  if (bgStyle === 'gradient') bg = 'linear-gradient(160deg,' + t.bg + ' 0%,' + t.accent + '22 100%)';
+  if (bgStyle === 'light')    bg = '#F5F5F5';
+  phone.style.background = bg;
+
+  // Button radius
+  var br = btnStyle === 'square' ? '8px' : btnStyle === 'outline' ? '12px' : '100px';
+
+  // Avatar
+  var av = document.getElementById('pp-avatar');
+  if (av) { av.textContent = emoji || '😊'; av.style.background = 'linear-gradient(' + t.grad + ')'; }
+
+  // Name
+  var nm = document.getElementById('pp-name');
+  if (nm) { nm.textContent = name || 'Your Name'; nm.style.color = t.text; }
+
+  // Bio
+  var bi = document.getElementById('pp-bio');
+  if (bi) bi.textContent = bio || '';
+
+  // Links
+  var ld = document.getElementById('pp-links');
+  if (!ld) return;
+  ld.innerHTML = '';
+  links.forEach(function(link) {
+    var a = document.createElement('a');
+    a.href   = link.url;
+    a.target = '_blank';
+    a.rel    = 'noopener noreferrer';
+    var bgc, border, color;
+    if (btnStyle === 'outline') { bgc = 'transparent'; border = '1.5px solid ' + t.accent; color = t.accent; }
+    else                        { bgc = t.accent + '18'; border = '1px solid ' + t.accent + '33'; color = t.text; }
+    a.style.cssText = 'display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:' + br + ';font-size:.7rem;font-weight:700;margin-bottom:6px;text-decoration:none;cursor:pointer;background:' + bgc + ';border:' + border + ';color:' + color + ';';
+    a.innerHTML = '<span style="font-size:.95rem;">' + link.emoji + '</span><span style="flex:1;font-size:.7rem;font-weight:700;">' + link.label + '</span><span style="opacity:.4;font-size:.62rem;">→</span>';
+    ld.appendChild(a);
   });
 
-  document.getElementById('affiliate-btn')?.addEventListener('click', () => {
-    const msg = 'Affiliate program launching soon! 🎉';
-    document.getElementById('toast').textContent = msg;
-    document.getElementById('toast').className = 'show';
-    setTimeout(() => document.getElementById('toast').className = '', 3000);
-  });
+  // Page URL
+  var urlInp = document.getElementById('page-url');
+  if (urlInp) urlInp.value = 'https://stackd.bio/' + (username || 'yourname');
+}
+
+// ── COPY URL ────────────────────────────────────────────────
+function copyURL() {
+  var url = document.getElementById('page-url').value;
+  var btn = document.getElementById('copy-btn');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function() {
+      btn.textContent = '✓ Copied';
+      btn.style.background = '#22C55E';
+      showToast('Link copied! 🎉');
+      setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#A855F7'; }, 2500);
+    });
+  } else {
+    var el = document.createElement('textarea');
+    el.value = url;
+    el.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    btn.textContent = '✓ Copied';
+    btn.style.background = '#22C55E';
+    showToast('Link copied! 🎉');
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#A855F7'; }, 2500);
+  }
+}
+
+function shareTwitter() {
+  var url = document.getElementById('page-url').value;
+  window.open('https://twitter.com/intent/tweet?text=Check+out+my+Stackd+page!&url=' + encodeURIComponent(url), '_blank');
+}
+
+// ── TOAST ───────────────────────────────────────────────────
+var toastTimer;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(80px)';
+  }, 3000);
+}
+
+// ── AUTH MODAL ──────────────────────────────────────────────
+var authMode = 'login';
+function openAuthModal() {
+  var m = document.getElementById('auth-modal');
+  m.style.display = 'flex';
+}
+function closeAuthModal() {
+  document.getElementById('auth-modal').style.display = 'none';
+}
+function toggleAuthMode() {
+  authMode = authMode === 'login' ? 'signup' : 'login';
+  document.getElementById('auth-title').textContent    = authMode === 'login' ? 'Log In' : 'Create Account';
+  document.getElementById('auth-submit').textContent   = authMode === 'login' ? 'Log In' : 'Create Account';
+  document.getElementById('auth-toggle').textContent   = authMode === 'login' ? "Don't have an account? Sign up" : 'Already have an account? Log in';
+}
+function handleAuth(e) {
+  e.preventDefault();
+  showToast('Auth coming soon — Supabase setup is next! 🔐');
+  closeAuthModal();
+}
+function logOut() {
+  document.getElementById('nav-user-menu').style.display = 'none';
+  document.getElementById('nav-login-btn').style.display = '';
+  showToast('Logged out 👋');
+}
+
+// ── INIT ────────────────────────────────────────────────────
+buildThemeGrid();
+renderLinks();
+updatePreview();
 </script>
 
 </body>
