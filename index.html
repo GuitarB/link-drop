@@ -6,36 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Stackd — Build a stunning link-in-bio page in 60 seconds. Free forever.">
   <meta name="theme-color" content="#0D0D0D">
-  <meta property="og:title" content="Stackd — Your Links. Your Vibe.">
-  <meta property="og:description" content="Build a stunning bio page in 60 seconds. Share everything with one link.">
-  <meta property="og:url" content="https://stackd.bio">
   <title>Stackd — Your Links. Your Vibe.</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/builder.css">
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ── NAV ── -->
 
 <nav class="nav">
   <div class="nav-logo">Stackd</div>
   <div class="nav-right">
-    <button id="nav-login-btn" class="btn btn-ghost btn-sm" onclick="openAuthModal()">Log in</button>
-    <div id="nav-user-menu" class="hidden" style="display:none;align-items:center;gap:.5rem;">
-      <span id="nav-user-email" class="text-xs text-muted"></span>
-      <button class="btn btn-ghost btn-sm" onclick="logOut()">Out</button>
-    </div>
-    <a href="#pricing" class="btn btn-grad btn-sm">Pro ✦</a>
+    <!-- Logged OUT state -->
+    <button id="nav-login-btn" class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Log in</button>
+
+```
+<!-- Logged IN state (hidden by default) -->
+<div id="nav-user-menu" style="display:none;align-items:center;gap:.5rem;">
+  <div id="nav-avatar" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;" onclick="openAuthModal('account')">?</div>
+  <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Log out</button>
+</div>
+
+<a href="#pricing" class="btn btn-grad btn-sm">Pro ✦</a>
+```
+
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ── HERO ── -->
 
 <section style="padding:88px 1.25rem 2.5rem;text-align:center;position:relative;overflow:hidden;">
   <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:340px;height:240px;background:radial-gradient(ellipse,rgba(168,85,247,.2) 0%,transparent 70%);pointer-events:none;z-index:0;"></div>
   <div style="position:relative;z-index:1;">
     <div style="display:inline-flex;align-items:center;gap:.4rem;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.28);color:#C084FC;border-radius:100px;padding:.3rem .9rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.4rem;">✦ Free · No signup needed</div>
-    <h1 style="font-size:clamp(2.4rem,9vw,3.6rem);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:1rem;">Your links.<br><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Your vibe.</span></h1>
+    <h1 style="font-size:clamp(2.4rem,9vw,3.6rem);font-weight:800;letter-spacing:-2px;line-height:1.05;margin-bottom:1rem;">Your links.<br><span style="background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Your vibe.</span></h1>
     <p style="color:#888;font-size:.95rem;line-height:1.65;max-width:300px;margin:0 auto 2rem;">Build a stunning bio page in 60 seconds. Share everything with one link.</p>
     <div style="display:flex;flex-direction:column;gap:.75rem;max-width:300px;margin:0 auto 2rem;">
       <a href="#builder" class="btn btn-grad btn-lg">Build My Page Free →</a>
@@ -50,7 +56,7 @@
       </div>
       <p style="font-size:.8rem;color:#888;"><strong style="color:#fff;">50,000+</strong> pages created</p>
     </div>
-    <!-- Phone Mockup -->
+    <!-- Phone mockup -->
     <div style="width:220px;margin:0 auto;background:#181818;border-radius:32px;border:1.5px solid rgba(255,255,255,.1);padding:14px 12px 20px;box-shadow:0 32px 80px rgba(0,0,0,.55);">
       <div style="width:64px;height:18px;background:#000;border-radius:100px;margin:0 auto 14px;"></div>
       <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">🌟</div>
@@ -63,62 +69,57 @@
   </div>
 </section>
 
-<!-- AD SLOT 1 -->
+<!-- ── AD SLOT 1 ── -->
 
 <div style="margin:0 1.25rem 1.5rem;">
   <div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;">
     <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div>
-    <!-- ADSENSE: replace this comment block with your AdSense code -->
     <span style="font-size:.72rem;color:#444;">[Google AdSense Banner]</span>
   </div>
 </div>
 
-<!-- BUILDER -->
+<!-- ── BUILDER ── -->
 
 <section id="builder" style="padding:0 1.25rem 2rem;">
   <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ The Builder ✦</div>
   <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Make it yours</h2>
   <p style="text-align:center;color:#888;font-size:.9rem;line-height:1.6;margin:0 auto 2rem;max-width:280px;">No code. No friction. Just your links, your way.</p>
 
-  <!-- Builder Card -->
+  <!-- Save status bar -->
+
+  <div id="save-bar" style="display:none;align-items:center;justify-content:space-between;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.65rem 1rem;margin-bottom:1rem;">
+    <span id="save-status" style="font-size:.78rem;color:#888;">All changes saved ✓</span>
+    <button onclick="savePage()" class="btn btn-grad btn-sm" style="font-size:.75rem;padding:.35rem .85rem;">Save Now</button>
+  </div>
 
   <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;overflow:hidden;margin-bottom:1rem;">
+    <!-- Tab Bar -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(255,255,255,.08);">
+      <button id="tbtn-profile" onclick="switchTab('profile')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid #A855F7;color:#A855F7;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">👤</span>Profile</button>
+      <button id="tbtn-links"   onclick="switchTab('links')"   style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">🔗</span>Links</button>
+      <button id="tbtn-theme"   onclick="switchTab('theme')"   style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">🎨</span>Theme</button>
+      <button id="tbtn-publish" onclick="switchTab('publish')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">🚀</span>Publish</button>
+    </div>
 
 ```
-<!-- Tab Bar -->
-<div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(255,255,255,.08);">
-  <button class="tab-btn active" id="tbtn-profile" onclick="switchTab('profile')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid #A855F7;color:#A855F7;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-    <span style="font-size:1rem;">👤</span>Profile
-  </button>
-  <button class="tab-btn" id="tbtn-links" onclick="switchTab('links')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-    <span style="font-size:1rem;">🔗</span>Links
-  </button>
-  <button class="tab-btn" id="tbtn-theme" onclick="switchTab('theme')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-    <span style="font-size:1rem;">🎨</span>Theme
-  </button>
-  <button class="tab-btn" id="tbtn-publish" onclick="switchTab('publish')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
-    <span style="font-size:1rem;">🚀</span>Publish
-  </button>
-</div>
-
 <!-- Profile Panel -->
 <div id="tab-profile" style="padding:1.25rem;display:block;">
   <div style="margin-bottom:1rem;">
     <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Display Name</label>
-    <input type="text" id="inp-name" value="Your Name" placeholder="e.g. Alex Rivera" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
+    <input type="text" id="inp-name" value="Your Name" placeholder="e.g. Alex Rivera" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
   </div>
   <div style="margin-bottom:1rem;">
     <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Bio</label>
-    <textarea id="inp-bio" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;resize:none;height:72px;box-sizing:border-box;">Creator · Maker · Dreamer ✨</textarea>
+    <textarea id="inp-bio" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;resize:none;height:72px;box-sizing:border-box;">Creator · Maker · Dreamer ✨</textarea>
   </div>
   <div style="margin-bottom:1rem;">
     <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Avatar Emoji</label>
-    <input type="text" id="inp-emoji" value="🌟" maxlength="4" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:1.3rem;text-align:center;outline:none;box-sizing:border-box;">
+    <input type="text" id="inp-emoji" value="🌟" maxlength="4" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:1.3rem;text-align:center;outline:none;box-sizing:border-box;">
   </div>
   <div>
     <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Username</label>
-    <input type="text" id="inp-username" value="yourname" placeholder="yourname" oninput="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-    <div style="font-size:.72rem;color:#888;margin-top:.3rem;">Your page will be at stackd.bio/<span id="username-preview">yourname</span></div>
+    <input type="text" id="inp-username" value="yourname" placeholder="yourname" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
+    <div style="font-size:.72rem;color:#888;margin-top:.3rem;">Your page: stackd.bio/<span id="username-preview">yourname</span></div>
   </div>
 </div>
 
@@ -136,7 +137,7 @@
   </div>
   <div style="margin-bottom:1rem;">
     <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Button Style</label>
-    <select id="btn-style" onchange="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
+    <select id="btn-style" onchange="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
       <option value="pill">Pill / Rounded</option>
       <option value="square">Sharp / Blocky</option>
       <option value="outline">Outline</option>
@@ -144,7 +145,7 @@
   </div>
   <div>
     <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Background</label>
-    <select id="bg-style" onchange="updatePreview()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
+    <select id="bg-style" onchange="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
       <option value="dark">Dark</option>
       <option value="gradient">Gradient</option>
       <option value="light">Light</option>
@@ -159,7 +160,7 @@
     <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Share this link everywhere — Instagram bio, TikTok, Twitter, email signatures.</div>
     <div style="display:flex;gap:.5rem;">
       <input type="text" id="page-url" readonly style="flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.62rem .8rem;color:#fff;font-family:inherit;font-size:.76rem;outline:none;min-width:0;">
-      <button id="copy-btn" onclick="copyURL()" style="padding:.62rem 1rem;background:#A855F7;border:none;border-radius:10px;color:#fff;font-family:inherit;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;">Copy</button>
+      <button id="copy-btn" onclick="copyURL()" style="padding:.62rem 1rem;background:#A855F7;border:none;border-radius:10px;color:#fff;font-family:inherit;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;transition:background .2s;">Copy</button>
     </div>
     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem;">
       <button onclick="showToast('Paste your link in your Instagram bio! 📸')" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">📸 Instagram</button>
@@ -167,10 +168,16 @@
       <button onclick="shareTwitter()" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">🐦 Twitter</button>
     </div>
   </div>
-  <div style="background:#222;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.2rem;">
-    <div style="font-size:.88rem;font-weight:800;margin-bottom:.35rem;">⚡ Want analytics + stackd.bio domain?</div>
-    <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Track who clicked and where they came from. Go Pro and connect your custom domain.</div>
-    <a href="#pricing" class="btn btn-grad btn-lg" style="font-size:.85rem;padding:.75rem;">Upgrade to Pro →</a>
+  <!-- Save to account CTA -->
+  <div id="publish-save-cta" style="background:#222;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.2rem;">
+    <div style="font-size:.88rem;font-weight:800;margin-bottom:.35rem;">💾 Save your page forever</div>
+    <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Create a free account to save your page, edit it anytime, and never lose your links.</div>
+    <button onclick="openAuthModal('signup')" class="btn btn-grad btn-lg" style="font-size:.85rem;padding:.75rem;">Create Free Account →</button>
+  </div>
+  <!-- Shown when logged in -->
+  <div id="publish-saved-cta" style="display:none;background:#222;border:1px solid rgba(34,197,94,.2);border-radius:16px;padding:1.2rem;">
+    <div style="font-size:.88rem;font-weight:800;margin-bottom:.35rem;color:#22C55E;">✓ Page saved to your account</div>
+    <div style="font-size:.78rem;color:#888;line-height:1.5;">Your page auto-saves as you edit. Share your link and start growing your audience!</div>
   </div>
 </div>
 ```
@@ -182,7 +189,7 @@
   <div style="border:1px solid rgba(255,255,255,.08);border-radius:22px;background:#0D0D0D;padding:1.25rem;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
       <div style="display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#888;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;display:inline-block;"></span>
+        <span style="width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;display:inline-block;animation:blink 1.5s infinite;"></span>
         Live Preview
       </div>
       <button onclick="switchTab('publish')" class="btn btn-grad btn-sm">Publish →</button>
@@ -198,102 +205,72 @@
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- ── FEATURES ── -->
 
 <section style="padding:3rem 1.25rem;">
   <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ Why Stackd ✦</div>
   <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Built for creators</h2>
   <p style="text-align:center;color:#888;font-size:.9rem;margin:0 auto 2rem;max-width:280px;line-height:1.6;">Everything you need to stand out online.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
-    <div style="grid-column:span 2;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
-      <div style="font-size:1.5rem;margin-bottom:.5rem;">⚡</div>
-      <div style="font-size:.88rem;font-weight:800;margin-bottom:.3rem;">Live in 60 seconds</div>
-      <div style="font-size:.76rem;color:#888;line-height:1.5;">No account needed. Build, copy your link, start sharing instantly.</div>
-    </div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
-      <div style="font-size:1.4rem;margin-bottom:.45rem;">🎨</div>
-      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Bold themes</div>
-      <div style="font-size:.72rem;color:#888;line-height:1.5;">10 stunning themes that make your page pop.</div>
-    </div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
-      <div style="font-size:1.4rem;margin-bottom:.45rem;">📱</div>
-      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Mobile first</div>
-      <div style="font-size:.72rem;color:#888;line-height:1.5;">Looks perfect on every phone, every time.</div>
-    </div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
-      <div style="font-size:1.4rem;margin-bottom:.45rem;">📊</div>
-      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Analytics <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div>
-      <div style="font-size:.72rem;color:#888;line-height:1.5;">Track clicks and traffic sources in real time.</div>
-    </div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;">
-      <div style="font-size:1.4rem;margin-bottom:.45rem;">🌐</div>
-      <div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Custom domain <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div>
-      <div style="font-size:.72rem;color:#888;line-height:1.5;">Connect stackd.bio or your own domain.</div>
-    </div>
+    <div style="grid-column:span 2;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.5rem;margin-bottom:.5rem;">⚡</div><div style="font-size:.88rem;font-weight:800;margin-bottom:.3rem;">Live in 60 seconds</div><div style="font-size:.76rem;color:#888;line-height:1.5;">No account needed. Build, copy your link, start sharing instantly.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">🎨</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Bold themes</div><div style="font-size:.72rem;color:#888;line-height:1.5;">10 stunning themes.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">📱</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Mobile first</div><div style="font-size:.72rem;color:#888;line-height:1.5;">Perfect on every phone.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">📊</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Analytics <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div><div style="font-size:.72rem;color:#888;line-height:1.5;">Track clicks in real time.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">🌐</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Custom domain <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div><div style="font-size:.72rem;color:#888;line-height:1.5;">Connect stackd.bio.</div></div>
   </div>
 </section>
 
-<!-- AD SLOT 2 -->
+<!-- ── AD SLOT 2 ── -->
 
 <div style="margin:0 1.25rem 1.5rem;">
   <div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;">
     <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div>
-    <!-- ADSENSE: replace this comment with your AdSense code -->
     <span style="font-size:.72rem;color:#444;">[Google AdSense Rectangle]</span>
   </div>
 </div>
 
-<!-- PRICING -->
+<!-- ── PRICING ── -->
 
 <section id="pricing" style="padding:3rem 1.25rem;">
   <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ Pricing ✦</div>
   <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Simple pricing</h2>
   <p style="text-align:center;color:#888;font-size:.9rem;margin:0 auto 2rem;max-width:280px;line-height:1.6;">Free forever for the basics. Upgrade when you're ready.</p>
-
   <!-- Free -->
-
   <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:1.5rem;margin-bottom:1rem;">
     <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Free</div>
-    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;">$0 <small style="font-size:.85rem;font-weight:400;color:#888;letter-spacing:0;">/ forever</small></div>
+    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;">$0 <small style="font-size:.85rem;font-weight:400;color:#888;">/ forever</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>5 links</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>3 color themes</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Stackd subdomain</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Analytics</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Custom domain</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Remove branding</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Custom domain</li>
     </ul>
     <a href="#builder" class="btn btn-outline btn-lg" style="display:flex;">Start Building Free</a>
   </div>
-
   <!-- Pro -->
-
   <div style="background:#181818;border:1px solid #A855F7;border-radius:22px;padding:1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(168,85,247,.12);">
-    <div style="position:absolute;top:0;right:0;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.62rem;font-weight:800;padding:.3rem .9rem;border-bottom-left-radius:12px;text-transform:uppercase;letter-spacing:.08em;">Most Popular</div>
+    <div style="position:absolute;top:0;right:0;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.62rem;font-weight:800;padding:.3rem .9rem;border-bottom-left-radius:12px;text-transform:uppercase;">Most Popular</div>
     <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Pro</div>
-    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;letter-spacing:0;">$</sup>5 <small style="font-size:.85rem;font-weight:400;color:#888;letter-spacing:0;">/ month</small></div>
+    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;">$</sup>5 <small style="font-size:.85rem;font-weight:400;color:#888;">/ month</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Unlimited links</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>All 10 themes + custom</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Analytics dashboard</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Custom domain</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Remove branding</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Priority support</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Remove branding</li>
     </ul>
-    <button class="btn btn-grad btn-lg" onclick="showToast('Pro launching soon — join waitlist! 🎉')">Upgrade to Pro ✦</button>
+    <button class="btn btn-grad btn-lg" onclick="showToast('Pro launching soon! Join waitlist 🎉')">Upgrade to Pro ✦</button>
   </div>
-
   <!-- Business -->
-
   <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:1.5rem;">
     <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Business</div>
-    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;letter-spacing:0;">$</sup>19 <small style="font-size:.85rem;font-weight:400;color:#888;letter-spacing:0;">/ month</small></div>
+    <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;">$</sup>19 <small style="font-size:.85rem;font-weight:400;color:#888;">/ month</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Everything in Pro</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>5 team seats</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>API access</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>White-label option</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Dedicated support</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>White-label option</li>
     </ul>
     <button class="btn btn-outline btn-lg" onclick="showToast('Contact us: hello@stackd.bio')">Contact Sales</button>
   </div>
@@ -301,34 +278,24 @@
 
 <div style="height:1px;background:rgba(255,255,255,.08);margin:0 1.25rem;"></div>
 
-<!-- AFFILIATE -->
+<!-- ── AFFILIATE ── -->
 
 <section style="padding:3rem 1.25rem;">
   <div style="background:linear-gradient(135deg,rgba(236,72,153,.09),rgba(168,85,247,.09));border:1px solid rgba(236,72,153,.18);border-radius:22px;padding:2rem 1.25rem;text-align:center;">
     <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;margin-bottom:.6rem;">Earn with Stackd 💸</h2>
     <p style="color:#888;font-size:.88rem;max-width:280px;margin:.6rem auto 1.75rem;line-height:1.6;">Share Stackd and earn 30% recurring commission on every Pro subscriber. Forever.</p>
     <div style="display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap;margin-bottom:1.75rem;">
-      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;">
-        <div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">1</div>
-        <div style="font-size:.68rem;color:#888;margin-top:3px;">Get your link</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;">
-        <div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">2</div>
-        <div style="font-size:.68rem;color:#888;margin-top:3px;">Share it</div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;">
-        <div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">30%</div>
-        <div style="font-size:.68rem;color:#888;margin-top:3px;">Earn forever</div>
-      </div>
+      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;"><div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">1</div><div style="font-size:.68rem;color:#888;margin-top:3px;">Get your link</div></div>
+      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;"><div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">2</div><div style="font-size:.68rem;color:#888;margin-top:3px;">Share it</div></div>
+      <div style="background:rgba(255,255,255,.05);border-radius:14px;padding:.9rem;min-width:85px;"><div style="font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">30%</div><div style="font-size:.68rem;color:#888;margin-top:3px;">Earn forever</div></div>
     </div>
     <button class="btn btn-grad" style="font-size:.9rem;padding:.8rem 2rem;border-radius:100px;" onclick="showToast('Affiliate program launching soon! 🎉')">Join Affiliate Program →</button>
-    <p style="margin-top:1rem;font-size:.72rem;color:#888;">Paid monthly via PayPal or Stripe. No cap on earnings.</p>
   </div>
 </section>
 
 <div style="height:1px;background:rgba(255,255,255,.08);margin:0 1.25rem;"></div>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 
 <footer style="padding:1.5rem 1.25rem;text-align:center;">
   <div style="font-size:1.1rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.65rem;">Stackd</div>
@@ -336,108 +303,340 @@
   <div style="display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
     <a href="#" style="font-size:.75rem;color:#888;text-decoration:none;">Privacy</a>
     <a href="#" style="font-size:.75rem;color:#888;text-decoration:none;">Terms</a>
-    <a href="#affiliate" style="font-size:.75rem;color:#888;text-decoration:none;">Affiliate</a>
+    <a href="#" style="font-size:.75rem;color:#888;text-decoration:none;">Affiliate</a>
     <a href="mailto:hello@stackd.bio" style="font-size:.75rem;color:#888;text-decoration:none;">Contact</a>
   </div>
 </footer>
 
-<!-- AUTH MODAL -->
+<!-- ── AUTH MODAL ── -->
 
-<div id="auth-modal" onclick="if(event.target===this)closeAuthModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:500;align-items:flex-end;justify-content:center;">
-  <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px 22px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;">
+<div id="auth-modal" onclick="if(event.target===this)closeAuthModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:500;align-items:flex-end;justify-content:center;">
+  <div style="background:#181818;border:1px solid rgba(255,255,255,.1);border-radius:22px 22px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;animation:slideUp .3s ease;">
     <div style="width:36px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:0 auto 1.5rem;"></div>
-    <div style="font-weight:800;font-size:1.1rem;margin-bottom:1rem;" id="auth-title">Log In</div>
-    <form id="auth-form" onsubmit="handleAuth(event)">
-      <div style="margin-bottom:1rem;">
-        <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Email</label>
-        <input type="email" id="auth-email" placeholder="you@example.com" required style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-      </div>
-      <div style="margin-bottom:1rem;">
-        <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Password</label>
-        <input type="password" id="auth-password" placeholder="8+ characters" required style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-      </div>
-      <button type="submit" id="auth-submit" class="btn btn-grad btn-lg" style="margin-top:.5rem;">Log In</button>
-    </form>
-    <button onclick="toggleAuthMode()" id="auth-toggle" style="width:100%;margin-top:.75rem;padding:.75rem;background:none;border:none;color:#888;font-family:inherit;font-size:.82rem;cursor:pointer;">Don't have an account? Sign up</button>
+    <div id="auth-title" style="font-weight:800;font-size:1.1rem;margin-bottom:.35rem;">Log In</div>
+    <div id="auth-subtitle" style="font-size:.82rem;color:#888;margin-bottom:1.25rem;">Welcome back to Stackd</div>
+
+```
+<!-- Error message -->
+<div id="auth-error" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:.65rem .9rem;font-size:.8rem;color:#EF4444;margin-bottom:1rem;"></div>
+
+<form id="auth-form" onsubmit="handleAuth(event)">
+  <div style="margin-bottom:1rem;">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Email</label>
+    <input type="email" id="auth-email" placeholder="you@example.com" required autocomplete="email" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
+  </div>
+  <div style="margin-bottom:1.25rem;" id="auth-pass-wrap">
+    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Password</label>
+    <input type="password" id="auth-password" placeholder="8+ characters" autocomplete="current-password" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
+  </div>
+  <button type="submit" id="auth-submit" class="btn btn-grad btn-lg" style="font-size:.95rem;">Log In</button>
+</form>
+
+<div style="text-align:center;margin-top:1rem;">
+  <button id="auth-toggle" onclick="toggleAuthMode()" style="background:none;border:none;color:#888;font-family:inherit;font-size:.82rem;cursor:pointer;padding:.5rem;">Don't have an account? <span style="color:#A855F7;font-weight:700;">Sign up free</span></button>
+</div>
+<div style="text-align:center;margin-top:.25rem;">
+  <button onclick="handleForgotPassword()" style="background:none;border:none;color:#555;font-family:inherit;font-size:.75rem;cursor:pointer;padding:.25rem;">Forgot password?</button>
+</div>
+```
+
   </div>
 </div>
 
-<!-- TOAST -->
+<!-- ── TOAST ── -->
 
 <div id="toast" style="position:fixed;bottom:calc(1.5rem + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(80px);background:#fff;color:#000;font-family:inherit;font-weight:700;font-size:.85rem;padding:.72rem 1.4rem;border-radius:100px;opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4);pointer-events:none;"></div>
 
-<!-- SCRIPTS — plain script tag, no modules, works everywhere -->
+<style>
+@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
+@keyframes blink   { 0%,100%{opacity:1} 50%{opacity:.3} }
+</style>
 
 <script>
-// ── THEMES ──────────────────────────────────────────────────
-const THEMES = [
-  { id:'purple', bg:'#0D0D0D', accent:'#A855F7', text:'#FFF', grad:'135deg,#A855F7,#EC4899' },
-  { id:'cyan',   bg:'#020F12', accent:'#06B6D4', text:'#F0FFFE', grad:'135deg,#06B6D4,#6366F1' },
-  { id:'lime',   bg:'#080C00', accent:'#84CC16', text:'#F7FFE0', grad:'135deg,#84CC16,#22C55E' },
-  { id:'rose',   bg:'#0F0508', accent:'#F43F5E', text:'#FFF0F3', grad:'135deg,#F43F5E,#FB923C' },
-  { id:'indigo', bg:'#06060F', accent:'#6366F1', text:'#F0F0FF', grad:'135deg,#6366F1,#A855F7' },
-  { id:'amber',  bg:'#0C0800', accent:'#F59E0B', text:'#FFFBEB', grad:'135deg,#F59E0B,#EF4444' },
-  { id:'teal',   bg:'#00080A', accent:'#14B8A6', text:'#F0FFFD', grad:'135deg,#14B8A6,#6366F1' },
-  { id:'pink',   bg:'#0F0008', accent:'#EC4899', text:'#FFF0F8', grad:'135deg,#EC4899,#A855F7' },
-  { id:'orange', bg:'#0C0400', accent:'#F97316', text:'#FFF7F0', grad:'135deg,#F97316,#EAB308' },
-  { id:'white',  bg:'#F5F5F5', accent:'#6366F1', text:'#111',   grad:'135deg,#6366F1,#A855F7' },
-];
-let activeTheme = 0;
+// ── SUPABASE INIT ────────────────────────────────────────────
+const SUPABASE_URL  = 'https://yencpkorwedidwbkquqc.supabase.co';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllbmNwa29yd2VkaWR3YmtxdXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjE0NTEsImV4cCI6MjA4OTMzNzQ1MX0.6MsQRtoJbdKSPooEPHgJhhbff_TaPwAQCEfeH0H_Nkg';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── STATE ───────────────────────────────────────────────────
+// ── APP STATE ────────────────────────────────────────────────
 const FREE_LIMIT = 5;
-let isPro = false;
+let currentUser  = null;
+let isPro        = false;
+let saveTimer    = null;
+let activeTheme  = 0;
+
 let links = [
   { emoji:'📸', label:'Instagram', url:'https://instagram.com' },
-  { emoji:'🎵', label:'My Music',  url:'https://spotify.com' },
+  { emoji:'🎵', label:'My Music',  url:'https://spotify.com'  },
   { emoji:'🛍️', label:'Shop',      url:'https://yourshop.com' },
 ];
 
-// ── TABS ────────────────────────────────────────────────────
+const THEMES = [
+  { id:'purple', bg:'#0D0D0D', accent:'#A855F7', text:'#FFF',     grad:'135deg,#A855F7,#EC4899' },
+  { id:'cyan',   bg:'#020F12', accent:'#06B6D4', text:'#F0FFFE',  grad:'135deg,#06B6D4,#6366F1' },
+  { id:'lime',   bg:'#080C00', accent:'#84CC16', text:'#F7FFE0',  grad:'135deg,#84CC16,#22C55E' },
+  { id:'rose',   bg:'#0F0508', accent:'#F43F5E', text:'#FFF0F3',  grad:'135deg,#F43F5E,#FB923C' },
+  { id:'indigo', bg:'#06060F', accent:'#6366F1', text:'#F0F0FF',  grad:'135deg,#6366F1,#A855F7' },
+  { id:'amber',  bg:'#0C0800', accent:'#F59E0B', text:'#FFFBEB',  grad:'135deg,#F59E0B,#EF4444' },
+  { id:'teal',   bg:'#00080A', accent:'#14B8A6', text:'#F0FFFD',  grad:'135deg,#14B8A6,#6366F1' },
+  { id:'pink',   bg:'#0F0008', accent:'#EC4899', text:'#FFF0F8',  grad:'135deg,#EC4899,#A855F7' },
+  { id:'orange', bg:'#0C0400', accent:'#F97316', text:'#FFF7F0',  grad:'135deg,#F97316,#EAB308' },
+  { id:'white',  bg:'#F5F5F5', accent:'#6366F1', text:'#111',     grad:'135deg,#6366F1,#A855F7' },
+];
+
+// ── AUTH STATE LISTENER ──────────────────────────────────────
+sb.auth.onAuthStateChange(function(event, session) {
+  currentUser = session ? session.user : null;
+  if (currentUser) {
+    onLoginSuccess();
+    loadPageFromDB();
+  } else {
+    onLogout();
+  }
+});
+
+// ── AUTH UI UPDATES ──────────────────────────────────────────
+function onLoginSuccess() {
+  document.getElementById('nav-login-btn').style.display = 'none';
+  var menu = document.getElementById('nav-user-menu');
+  menu.style.display = 'flex';
+  // Show first letter of email as avatar
+  var initials = currentUser.email ? currentUser.email[0].toUpperCase() : '?';
+  document.getElementById('nav-avatar').textContent = initials;
+  // Show save bar
+  document.getElementById('save-bar').style.display = 'flex';
+  // Update publish tab CTAs
+  document.getElementById('publish-save-cta').style.display  = 'none';
+  document.getElementById('publish-saved-cta').style.display = 'block';
+}
+
+function onLogout() {
+  document.getElementById('nav-login-btn').style.display = '';
+  document.getElementById('nav-user-menu').style.display  = 'none';
+  document.getElementById('save-bar').style.display       = 'none';
+  document.getElementById('publish-save-cta').style.display  = 'block';
+  document.getElementById('publish-saved-cta').style.display = 'none';
+}
+
+// ── AUTH MODAL ───────────────────────────────────────────────
+var authMode = 'login';
+
+function openAuthModal(mode) {
+  authMode = mode || 'login';
+  setAuthMode(authMode);
+  document.getElementById('auth-modal').style.display = 'flex';
+  document.getElementById('auth-error').style.display = 'none';
+  document.getElementById('auth-email').value    = '';
+  document.getElementById('auth-password').value = '';
+  setTimeout(function(){ document.getElementById('auth-email').focus(); }, 300);
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-modal').style.display = 'none';
+}
+
+function setAuthMode(mode) {
+  authMode = mode;
+  var isLogin = mode === 'login';
+  var isSignup = mode === 'signup';
+  document.getElementById('auth-title').textContent    = isSignup ? 'Create Account' : 'Log In';
+  document.getElementById('auth-subtitle').textContent = isSignup ? 'Join Stackd — free forever' : 'Welcome back to Stackd';
+  document.getElementById('auth-submit').textContent   = isSignup ? 'Create Free Account' : 'Log In';
+  document.getElementById('auth-pass-wrap').style.display = '';
+  document.getElementById('auth-toggle').innerHTML = isSignup
+    ? 'Already have an account? <span style="color:#A855F7;font-weight:700;">Log in</span>'
+    : "Don't have an account? <span style='color:#A855F7;font-weight:700;'>Sign up free</span>";
+}
+
+function toggleAuthMode() {
+  setAuthMode(authMode === 'login' ? 'signup' : 'login');
+  document.getElementById('auth-error').style.display = 'none';
+}
+
+async function handleAuth(e) {
+  e.preventDefault();
+  var email    = document.getElementById('auth-email').value.trim();
+  var password = document.getElementById('auth-password').value;
+  var btn      = document.getElementById('auth-submit');
+  var errEl    = document.getElementById('auth-error');
+
+  if (!email) { showAuthError('Please enter your email'); return; }
+  if (authMode !== 'reset' && !password) { showAuthError('Please enter your password'); return; }
+  if (password && password.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
+
+  btn.disabled    = true;
+  btn.textContent = authMode === 'signup' ? 'Creating account...' : 'Logging in...';
+  errEl.style.display = 'none';
+
+  var result;
+  if (authMode === 'signup') {
+    result = await sb.auth.signUp({ email: email, password: password });
+    if (!result.error) {
+      showToast('Check your email to confirm your account! 📬', 'success');
+      closeAuthModal();
+    }
+  } else {
+    result = await sb.auth.signInWithPassword({ email: email, password: password });
+    if (!result.error) {
+      showToast('Welcome back! 👋', 'success');
+      closeAuthModal();
+    }
+  }
+
+  if (result.error) {
+    showAuthError(result.error.message);
+  }
+
+  btn.disabled    = false;
+  btn.textContent = authMode === 'signup' ? 'Create Free Account' : 'Log In';
+}
+
+async function handleForgotPassword() {
+  var email = document.getElementById('auth-email').value.trim();
+  if (!email) { showAuthError('Enter your email above first'); return; }
+  var result = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin
+  });
+  if (result.error) {
+    showAuthError(result.error.message);
+  } else {
+    showToast('Password reset email sent! Check your inbox 📬', 'success');
+    closeAuthModal();
+  }
+}
+
+function showAuthError(msg) {
+  var el = document.getElementById('auth-error');
+  el.textContent    = msg;
+  el.style.display  = 'block';
+}
+
+async function handleLogout() {
+  await sb.auth.signOut();
+  showToast('Logged out. See you soon! 👋');
+}
+
+// ── SAVE / LOAD PAGE ─────────────────────────────────────────
+function getPageData() {
+  return {
+    name:     document.getElementById('inp-name').value,
+    bio:      document.getElementById('inp-bio').value,
+    emoji:    document.getElementById('inp-emoji').value,
+    username: document.getElementById('inp-username').value,
+    themeId:  THEMES[activeTheme].id,
+    btnStyle: document.getElementById('btn-style').value,
+    bgStyle:  document.getElementById('bg-style').value,
+    links:    links.slice(),
+  };
+}
+
+async function savePage() {
+  if (!currentUser) return;
+  var data     = getPageData();
+  var username = data.username || ('user_' + currentUser.id.slice(0,8));
+  setSaveStatus('Saving...');
+
+  var result = await sb.from('pages').upsert({
+    user_id:   currentUser.id,
+    username:  username,
+    page_data: data,
+    updated_at: new Date().toISOString(),
+  }, { onConflict: 'user_id' });
+
+  if (result.error) {
+    setSaveStatus('Save failed ✗');
+    console.error('Save error:', result.error);
+  } else {
+    setSaveStatus('All changes saved ✓');
+  }
+}
+
+async function loadPageFromDB() {
+  if (!currentUser) return;
+  var result = await sb.from('pages')
+    .select('page_data')
+    .eq('user_id', currentUser.id)
+    .single();
+
+  if (result.data && result.data.page_data) {
+    applyPageData(result.data.page_data);
+    setSaveStatus('Page loaded ✓');
+  }
+}
+
+function applyPageData(data) {
+  if (data.name)     document.getElementById('inp-name').value     = data.name;
+  if (data.bio)      document.getElementById('inp-bio').value      = data.bio;
+  if (data.emoji)    document.getElementById('inp-emoji').value    = data.emoji;
+  if (data.username) document.getElementById('inp-username').value = data.username;
+  if (data.btnStyle) document.getElementById('btn-style').value    = data.btnStyle;
+  if (data.bgStyle)  document.getElementById('bg-style').value     = data.bgStyle;
+  if (data.links)    links = data.links;
+  if (data.themeId) {
+    var idx = THEMES.findIndex(function(t){ return t.id === data.themeId; });
+    if (idx >= 0) activeTheme = idx;
+  }
+  renderLinks();
+  refreshThemeGrid();
+  updatePreview();
+}
+
+function setSaveStatus(msg) {
+  var el = document.getElementById('save-status');
+  if (el) el.textContent = msg;
+}
+
+// Auto-save with debounce
+function onFieldChange() {
+  updatePreview();
+  if (!currentUser) return;
+  setSaveStatus('Unsaved changes...');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(savePage, 1500);
+}
+
+// ── TABS ─────────────────────────────────────────────────────
 function switchTab(name) {
-  var panels = ['profile','links','theme','publish'];
-  panels.forEach(function(p) {
-    var panel = document.getElementById('tab-' + p);
+  ['profile','links','theme','publish'].forEach(function(p) {
+    var panel = document.getElementById('tab-'  + p);
     var btn   = document.getElementById('tbtn-' + p);
     if (!panel || !btn) return;
-    if (p === name) {
-      panel.style.display = 'block';
-      btn.style.color = '#A855F7';
-      btn.style.borderBottom = '2px solid #A855F7';
-    } else {
-      panel.style.display = 'none';
-      btn.style.color = '#888';
-      btn.style.borderBottom = '2px solid transparent';
-    }
+    var active = p === name;
+    panel.style.display      = active ? 'block' : 'none';
+    btn.style.color          = active ? '#A855F7' : '#888';
+    btn.style.borderBottom   = active ? '2px solid #A855F7' : '2px solid transparent';
   });
 }
 
-// ── THEME GRID ──────────────────────────────────────────────
+// ── THEME GRID ────────────────────────────────────────────────
 function buildThemeGrid() {
   var grid = document.getElementById('theme-grid');
   if (!grid) return;
   grid.innerHTML = '';
   THEMES.forEach(function(t, i) {
     var d = document.createElement('div');
-    d.style.cssText = 'height:40px;border-radius:11px;cursor:pointer;border:2px solid ' + (i===0?'#fff':'transparent') + ';transition:all .2s;position:relative;overflow:hidden;background:linear-gradient(' + t.grad + ');';
-    d.title = t.id;
-    if (i === 0) d.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>';
+    d.style.cssText = 'height:40px;border-radius:11px;cursor:pointer;border:2px solid ' + (i===0?'#fff':'transparent') + ';position:relative;overflow:hidden;background:linear-gradient(' + t.grad + ');transition:transform .15s;';
+    if (i === 0) d.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>';
     (function(idx){ d.onclick = function(){ setTheme(idx); }; })(i);
     grid.appendChild(d);
   });
 }
 
-function setTheme(i) {
-  activeTheme = i;
+function refreshThemeGrid() {
   var swatches = document.getElementById('theme-grid').children;
   for (var j = 0; j < swatches.length; j++) {
-    swatches[j].style.border = j === i ? '2px solid #fff' : '2px solid transparent';
-    swatches[j].innerHTML = j === i ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.9rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>' : '';
+    swatches[j].style.border  = j === activeTheme ? '2px solid #fff' : '2px solid transparent';
+    swatches[j].innerHTML     = j === activeTheme ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>' : '';
   }
-  updatePreview();
 }
 
-// ── LINK LIST ───────────────────────────────────────────────
+function setTheme(i) {
+  activeTheme = i;
+  refreshThemeGrid();
+  onFieldChange();
+}
+
+// ── LINK LIST ─────────────────────────────────────────────────
 function renderLinks() {
   var list = document.getElementById('link-list');
   if (!list) return;
@@ -446,22 +645,19 @@ function renderLinks() {
     var card = document.createElement('div');
     card.style.cssText = 'background:#2A2A2A;border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:.9rem;margin-bottom:.75rem;position:relative;';
     card.innerHTML =
-      '<button onclick="removeLink(' + i + ')" style="position:absolute;top:.7rem;right:.7rem;width:26px;height:26px;border-radius:7px;background:rgba(239,68,68,.12);border:none;color:#EF4444;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>' +
+      '<button onclick="removeLink(' + i + ')" style="position:absolute;top:.7rem;right:.7rem;width:26px;height:26px;border-radius:7px;background:rgba(239,68,68,.12);border:none;color:#EF4444;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;">×</button>' +
       '<div style="display:flex;gap:.5rem;margin-bottom:.5rem;">' +
-        '<input type="text" value="' + link.emoji + '" maxlength="4" data-i="' + i + '" data-f="emoji" style="width:52px;text-align:center;font-size:1.1rem;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .4rem;color:#fff;font-family:inherit;outline:none;flex:none;">' +
-        '<input type="text" value="' + link.label + '" data-i="' + i + '" data-f="label" placeholder="Link title" style="flex:1;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;min-width:0;">' +
+        '<input type="text" value="' + escHtml(link.emoji) + '" maxlength="4" data-i="' + i + '" data-f="emoji" style="width:52px;text-align:center;font-size:1.1rem;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .4rem;color:#fff;font-family:inherit;outline:none;flex:none;">' +
+        '<input type="text" value="' + escHtml(link.label) + '" data-i="' + i + '" data-f="label" placeholder="Link title" style="flex:1;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;min-width:0;">' +
       '</div>' +
-      '<input type="url" value="' + link.url + '" data-i="' + i + '" data-f="url" placeholder="https://..." style="width:100%;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;box-sizing:border-box;">';
+      '<input type="url" value="' + escHtml(link.url) + '" data-i="' + i + '" data-f="url" placeholder="https://..." style="width:100%;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;box-sizing:border-box;">';
     list.appendChild(card);
   });
 
-  // Bind inputs
   list.querySelectorAll('input[data-i]').forEach(function(inp) {
     inp.oninput = function() {
-      var idx   = parseInt(inp.dataset.i);
-      var field = inp.dataset.f;
-      links[idx][field] = inp.value;
-      updatePreview();
+      links[parseInt(inp.dataset.i)][inp.dataset.f] = inp.value;
+      onFieldChange();
     };
   });
 
@@ -470,33 +666,39 @@ function renderLinks() {
 
 function addLink() {
   if (!isPro && links.length >= FREE_LIMIT) {
-    showToast('Free plan: ' + FREE_LIMIT + ' links max. Upgrade to Pro for unlimited! ✦');
+    showToast('Free plan: ' + FREE_LIMIT + ' links max. Upgrade to Pro! ✦', 'error');
     return;
   }
   links.push({ emoji:'✨', label:'New Link', url:'https://' });
   renderLinks();
+  onFieldChange();
 }
 
 function removeLink(i) {
   links.splice(i, 1);
   renderLinks();
+  onFieldChange();
 }
 
-// ── LIVE PREVIEW ────────────────────────────────────────────
+function escHtml(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── LIVE PREVIEW ──────────────────────────────────────────────
 function updatePreview() {
   var t        = THEMES[activeTheme];
-  var name     = document.getElementById('inp-name')     ? document.getElementById('inp-name').value     : 'Your Name';
-  var bio      = document.getElementById('inp-bio')      ? document.getElementById('inp-bio').value      : '';
-  var emoji    = document.getElementById('inp-emoji')    ? document.getElementById('inp-emoji').value    : '🌟';
-  var username = document.getElementById('inp-username') ? document.getElementById('inp-username').value : 'yourname';
-  var btnStyle = document.getElementById('btn-style')    ? document.getElementById('btn-style').value    : 'pill';
-  var bgStyle  = document.getElementById('bg-style')     ? document.getElementById('bg-style').value     : 'dark';
+  var name     = (document.getElementById('inp-name')     || {}).value || 'Your Name';
+  var bio      = (document.getElementById('inp-bio')      || {}).value || '';
+  var emoji    = (document.getElementById('inp-emoji')    || {}).value || '🌟';
+  var username = (document.getElementById('inp-username') || {}).value || 'yourname';
+  var btnStyle = (document.getElementById('btn-style')    || {}).value || 'pill';
+  var bgStyle  = (document.getElementById('bg-style')     || {}).value || 'dark';
 
-  // Update username hint
+  // Username hint
   var hint = document.getElementById('username-preview');
   if (hint) hint.textContent = username || 'yourname';
 
-  // Phone background
+  // Phone bg
   var phone = document.getElementById('preview-phone');
   if (!phone) return;
   var bg = t.bg;
@@ -511,13 +713,11 @@ function updatePreview() {
   var av = document.getElementById('pp-avatar');
   if (av) { av.textContent = emoji || '😊'; av.style.background = 'linear-gradient(' + t.grad + ')'; }
 
-  // Name
+  // Name & bio
   var nm = document.getElementById('pp-name');
-  if (nm) { nm.textContent = name || 'Your Name'; nm.style.color = t.text; }
-
-  // Bio
   var bi = document.getElementById('pp-bio');
-  if (bi) bi.textContent = bio || '';
+  if (nm) { nm.textContent = name || 'Your Name'; nm.style.color = t.text; }
+  if (bi)   bi.textContent = bio || '';
 
   // Links
   var ld = document.getElementById('pp-links');
@@ -525,14 +725,12 @@ function updatePreview() {
   ld.innerHTML = '';
   links.forEach(function(link) {
     var a = document.createElement('a');
-    a.href   = link.url;
-    a.target = '_blank';
-    a.rel    = 'noopener noreferrer';
+    a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
     var bgc, border, color;
     if (btnStyle === 'outline') { bgc = 'transparent'; border = '1.5px solid ' + t.accent; color = t.accent; }
     else                        { bgc = t.accent + '18'; border = '1px solid ' + t.accent + '33'; color = t.text; }
-    a.style.cssText = 'display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:' + br + ';font-size:.7rem;font-weight:700;margin-bottom:6px;text-decoration:none;cursor:pointer;background:' + bgc + ';border:' + border + ';color:' + color + ';';
-    a.innerHTML = '<span style="font-size:.95rem;">' + link.emoji + '</span><span style="flex:1;font-size:.7rem;font-weight:700;">' + link.label + '</span><span style="opacity:.4;font-size:.62rem;">→</span>';
+    a.style.cssText = 'display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:' + br + ';font-size:.7rem;font-weight:700;margin-bottom:6px;text-decoration:none;background:' + bgc + ';border:' + border + ';color:' + color + ';';
+    a.innerHTML = '<span style="font-size:.95rem;">' + link.emoji + '</span><span style="flex:1;">' + escHtml(link.label) + '</span><span style="opacity:.4;font-size:.62rem;">→</span>';
     ld.appendChild(a);
   });
 
@@ -541,29 +739,21 @@ function updatePreview() {
   if (urlInp) urlInp.value = 'https://stackd.bio/' + (username || 'yourname');
 }
 
-// ── COPY URL ────────────────────────────────────────────────
+// ── COPY / SHARE ──────────────────────────────────────────────
 function copyURL() {
   var url = document.getElementById('page-url').value;
   var btn = document.getElementById('copy-btn');
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(function() {
-      btn.textContent = '✓ Copied';
-      btn.style.background = '#22C55E';
-      showToast('Link copied! 🎉');
-      setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#A855F7'; }, 2500);
-    });
-  } else {
-    var el = document.createElement('textarea');
-    el.value = url;
-    el.style.cssText = 'position:fixed;opacity:0;';
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    btn.textContent = '✓ Copied';
-    btn.style.background = '#22C55E';
-    showToast('Link copied! 🎉');
+  var copy = function() {
+    btn.textContent = '✓ Copied'; btn.style.background = '#22C55E';
+    showToast('Link copied! 🎉', 'success');
     setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#A855F7'; }, 2500);
+  };
+  if (navigator.clipboard) { navigator.clipboard.writeText(url).then(copy); }
+  else {
+    var el = document.createElement('textarea');
+    el.value = url; el.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(el); el.select(); document.execCommand('copy');
+    document.body.removeChild(el); copy();
   }
 }
 
@@ -572,47 +762,23 @@ function shareTwitter() {
   window.open('https://twitter.com/intent/tweet?text=Check+out+my+Stackd+page!&url=' + encodeURIComponent(url), '_blank');
 }
 
-// ── TOAST ───────────────────────────────────────────────────
+// ── TOAST ─────────────────────────────────────────────────────
 var toastTimer;
-function showToast(msg) {
+function showToast(msg, type) {
   var t = document.getElementById('toast');
   t.textContent = msg;
-  t.style.opacity = '1';
-  t.style.transform = 'translateX(-50%) translateY(0)';
+  t.style.background = type === 'error' ? '#EF4444' : type === 'success' ? '#22C55E' : '#fff';
+  t.style.color      = (type === 'error' || type === 'success') ? '#fff' : '#000';
+  t.style.opacity    = '1';
+  t.style.transform  = 'translateX(-50%) translateY(0)';
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){
-    t.style.opacity = '0';
+    t.style.opacity   = '0';
     t.style.transform = 'translateX(-50%) translateY(80px)';
-  }, 3000);
+  }, 3200);
 }
 
-// ── AUTH MODAL ──────────────────────────────────────────────
-var authMode = 'login';
-function openAuthModal() {
-  var m = document.getElementById('auth-modal');
-  m.style.display = 'flex';
-}
-function closeAuthModal() {
-  document.getElementById('auth-modal').style.display = 'none';
-}
-function toggleAuthMode() {
-  authMode = authMode === 'login' ? 'signup' : 'login';
-  document.getElementById('auth-title').textContent    = authMode === 'login' ? 'Log In' : 'Create Account';
-  document.getElementById('auth-submit').textContent   = authMode === 'login' ? 'Log In' : 'Create Account';
-  document.getElementById('auth-toggle').textContent   = authMode === 'login' ? "Don't have an account? Sign up" : 'Already have an account? Log in';
-}
-function handleAuth(e) {
-  e.preventDefault();
-  showToast('Auth coming soon — Supabase setup is next! 🔐');
-  closeAuthModal();
-}
-function logOut() {
-  document.getElementById('nav-user-menu').style.display = 'none';
-  document.getElementById('nav-login-btn').style.display = '';
-  showToast('Logged out 👋');
-}
-
-// ── INIT ────────────────────────────────────────────────────
+// ── INIT ──────────────────────────────────────────────────────
 buildThemeGrid();
 renderLinks();
 updatePreview();
