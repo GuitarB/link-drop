@@ -9,7 +9,6 @@
   <title>Stackd — Your Links. Your Vibe.</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/builder.css">
-  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -19,19 +18,12 @@
 <nav class="nav">
   <div class="nav-logo">Stackd</div>
   <div class="nav-right">
-    <!-- Logged OUT state -->
     <button id="nav-login-btn" class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Log in</button>
-
-```
-<!-- Logged IN state (hidden by default) -->
-<div id="nav-user-menu" style="display:none;align-items:center;gap:.5rem;">
-  <div id="nav-avatar" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;" onclick="openAuthModal('account')">?</div>
-  <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Log out</button>
-</div>
-
-<a href="#pricing" class="btn btn-grad btn-sm">Pro ✦</a>
-```
-
+    <div id="nav-user-menu" style="display:none;align-items:center;gap:.5rem;">
+      <div id="nav-avatar" onclick="openAuthModal('account')" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;cursor:pointer;">?</div>
+      <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Log out</button>
+    </div>
+    <a href="#pricing" class="btn btn-grad btn-sm">Pro ✦</a>
   </div>
 </nav>
 
@@ -56,7 +48,6 @@
       </div>
       <p style="font-size:.8rem;color:#888;"><strong style="color:#fff;">50,000+</strong> pages created</p>
     </div>
-    <!-- Phone mockup -->
     <div style="width:220px;margin:0 auto;background:#181818;border-radius:32px;border:1.5px solid rgba(255,255,255,.1);padding:14px 12px 20px;box-shadow:0 32px 80px rgba(0,0,0,.55);">
       <div style="width:64px;height:18px;background:#000;border-radius:100px;margin:0 auto 14px;"></div>
       <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">🌟</div>
@@ -71,12 +62,7 @@
 
 <!-- ── AD SLOT 1 ── -->
 
-<div style="margin:0 1.25rem 1.5rem;">
-  <div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;">
-    <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div>
-    <span style="font-size:.72rem;color:#444;">[Google AdSense Banner]</span>
-  </div>
-</div>
+<div style="margin:0 1.25rem 1.5rem;"><div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;"><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div><span style="font-size:.72rem;color:#444;">[Google AdSense Banner]</span></div></div>
 
 <!-- ── BUILDER ── -->
 
@@ -85,7 +71,7 @@
   <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Make it yours</h2>
   <p style="text-align:center;color:#888;font-size:.9rem;line-height:1.6;margin:0 auto 2rem;max-width:280px;">No code. No friction. Just your links, your way.</p>
 
-  <!-- Save status bar -->
+  <!-- Save bar -->
 
   <div id="save-bar" style="display:none;align-items:center;justify-content:space-between;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:.65rem 1rem;margin-bottom:1rem;">
     <span id="save-status" style="font-size:.78rem;color:#888;">All changes saved ✓</span>
@@ -94,33 +80,21 @@
 
   <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;overflow:hidden;margin-bottom:1rem;">
     <!-- Tab Bar -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid rgba(255,255,255,.08);">
-      <button id="tbtn-profile" onclick="switchTab('profile')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid #A855F7;color:#A855F7;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">👤</span>Profile</button>
-      <button id="tbtn-links"   onclick="switchTab('links')"   style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">🔗</span>Links</button>
-      <button id="tbtn-theme"   onclick="switchTab('theme')"   style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">🎨</span>Theme</button>
-      <button id="tbtn-publish" onclick="switchTab('publish')" style="padding:.82rem .2rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.66rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .2s;"><span style="font-size:1rem;">🚀</span>Publish</button>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);border-bottom:1px solid rgba(255,255,255,.08);">
+      <button id="tbtn-profile"   onclick="switchTab('profile')"   style="padding:.75rem .1rem;background:none;border:none;border-bottom:2px solid #A855F7;color:#A855F7;font-family:inherit;font-size:.6rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:.9rem;">👤</span>Profile</button>
+      <button id="tbtn-links"     onclick="switchTab('links')"     style="padding:.75rem .1rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.6rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:.9rem;">🔗</span>Links</button>
+      <button id="tbtn-theme"     onclick="switchTab('theme')"     style="padding:.75rem .1rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.6rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:.9rem;">🎨</span>Theme</button>
+      <button id="tbtn-publish"   onclick="switchTab('publish')"   style="padding:.75rem .1rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.6rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:.9rem;">🚀</span>Publish</button>
+      <button id="tbtn-analytics" onclick="switchTab('analytics')" style="padding:.75rem .1rem;background:none;border:none;border-bottom:2px solid transparent;color:#888;font-family:inherit;font-size:.6rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:.9rem;">📊</span>Stats</button>
     </div>
 
 ```
 <!-- Profile Panel -->
 <div id="tab-profile" style="padding:1.25rem;display:block;">
-  <div style="margin-bottom:1rem;">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Display Name</label>
-    <input type="text" id="inp-name" value="Your Name" placeholder="e.g. Alex Rivera" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-  </div>
-  <div style="margin-bottom:1rem;">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Bio</label>
-    <textarea id="inp-bio" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;resize:none;height:72px;box-sizing:border-box;">Creator · Maker · Dreamer ✨</textarea>
-  </div>
-  <div style="margin-bottom:1rem;">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Avatar Emoji</label>
-    <input type="text" id="inp-emoji" value="🌟" maxlength="4" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:1.3rem;text-align:center;outline:none;box-sizing:border-box;">
-  </div>
-  <div>
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Username</label>
-    <input type="text" id="inp-username" value="yourname" placeholder="yourname" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-    <div style="font-size:.72rem;color:#888;margin-top:.3rem;">Your page: stackd.bio/<span id="username-preview">yourname</span></div>
-  </div>
+  <div style="margin-bottom:1rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Display Name</label><input type="text" id="inp-name" placeholder="e.g. Alex Rivera" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;"></div>
+  <div style="margin-bottom:1rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Bio</label><textarea id="inp-bio" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;resize:none;height:72px;box-sizing:border-box;"></textarea></div>
+  <div style="margin-bottom:1rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Avatar Emoji</label><input type="text" id="inp-emoji" maxlength="4" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:1.3rem;text-align:center;outline:none;box-sizing:border-box;"></div>
+  <div><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Username</label><input type="text" id="inp-username" placeholder="yourname" oninput="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;"><div style="font-size:.72rem;color:#888;margin-top:.3rem;">Your page: stackd.bio/<span id="username-preview">yourname</span></div></div>
 </div>
 
 <!-- Links Panel -->
@@ -131,26 +105,15 @@
 
 <!-- Theme Panel -->
 <div id="tab-theme" style="padding:1.25rem;display:none;">
-  <div style="margin-bottom:1.2rem;">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.6rem;">Color Theme</label>
-    <div id="theme-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;"></div>
-  </div>
-  <div style="margin-bottom:1rem;">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Button Style</label>
+  <div style="margin-bottom:1.2rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.6rem;">Color Theme</label><div id="theme-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;"></div></div>
+  <div style="margin-bottom:1rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Button Style</label>
     <select id="btn-style" onchange="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
-      <option value="pill">Pill / Rounded</option>
-      <option value="square">Sharp / Blocky</option>
-      <option value="outline">Outline</option>
-    </select>
-  </div>
-  <div>
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Background</label>
+      <option value="pill">Pill / Rounded</option><option value="square">Sharp / Blocky</option><option value="outline">Outline</option>
+    </select></div>
+  <div><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Background</label>
     <select id="bg-style" onchange="onFieldChange()" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;-webkit-appearance:none;box-sizing:border-box;">
-      <option value="dark">Dark</option>
-      <option value="gradient">Gradient</option>
-      <option value="light">Light</option>
-    </select>
-  </div>
+      <option value="dark">Dark</option><option value="gradient">Gradient</option><option value="light">Light</option>
+    </select></div>
 </div>
 
 <!-- Publish Panel -->
@@ -160,7 +123,7 @@
     <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Share this link everywhere — Instagram bio, TikTok, Twitter, email signatures.</div>
     <div style="display:flex;gap:.5rem;">
       <input type="text" id="page-url" readonly style="flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.62rem .8rem;color:#fff;font-family:inherit;font-size:.76rem;outline:none;min-width:0;">
-      <button id="copy-btn" onclick="copyURL()" style="padding:.62rem 1rem;background:#A855F7;border:none;border-radius:10px;color:#fff;font-family:inherit;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;transition:background .2s;">Copy</button>
+      <button id="copy-btn" onclick="copyURL()" style="padding:.62rem 1rem;background:#A855F7;border:none;border-radius:10px;color:#fff;font-family:inherit;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;">Copy</button>
     </div>
     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem;">
       <button onclick="showToast('Paste your link in your Instagram bio! 📸')" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">📸 Instagram</button>
@@ -168,16 +131,66 @@
       <button onclick="shareTwitter()" style="padding:.46rem .88rem;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:100px;color:#fff;font-family:inherit;font-weight:600;font-size:.76rem;cursor:pointer;">🐦 Twitter</button>
     </div>
   </div>
-  <!-- Save to account CTA -->
   <div id="publish-save-cta" style="background:#222;border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.2rem;">
     <div style="font-size:.88rem;font-weight:800;margin-bottom:.35rem;">💾 Save your page forever</div>
-    <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Create a free account to save your page, edit it anytime, and never lose your links.</div>
+    <div style="font-size:.78rem;color:#888;margin-bottom:1rem;line-height:1.5;">Create a free account to save your page and track your clicks.</div>
     <button onclick="openAuthModal('signup')" class="btn btn-grad btn-lg" style="font-size:.85rem;padding:.75rem;">Create Free Account →</button>
   </div>
-  <!-- Shown when logged in -->
   <div id="publish-saved-cta" style="display:none;background:#222;border:1px solid rgba(34,197,94,.2);border-radius:16px;padding:1.2rem;">
     <div style="font-size:.88rem;font-weight:800;margin-bottom:.35rem;color:#22C55E;">✓ Page saved to your account</div>
-    <div style="font-size:.78rem;color:#888;line-height:1.5;">Your page auto-saves as you edit. Share your link and start growing your audience!</div>
+    <div style="font-size:.78rem;color:#888;line-height:1.5;">Auto-saves as you edit. Check the Stats tab to see your clicks!</div>
+  </div>
+</div>
+
+<!-- ── ANALYTICS PANEL ── -->
+<div id="tab-analytics" style="padding:1.25rem;display:none;">
+
+  <!-- Logged out gate -->
+  <div id="analytics-gate" style="text-align:center;padding:2rem 1rem;">
+    <div style="font-size:2.5rem;margin-bottom:1rem;">📊</div>
+    <div style="font-weight:800;font-size:1rem;margin-bottom:.5rem;">Track your clicks</div>
+    <div style="font-size:.82rem;color:#888;margin-bottom:1.5rem;line-height:1.5;">See exactly how many times each link gets clicked. Free for all accounts.</div>
+    <button onclick="openAuthModal('signup')" class="btn btn-grad btn-lg" style="font-size:.88rem;padding:.8rem;">Create Free Account →</button>
+  </div>
+
+  <!-- Logged in analytics -->
+  <div id="analytics-dashboard" style="display:none;">
+
+    <!-- Header row -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+      <div style="font-weight:800;font-size:.95rem;">Your Stats</div>
+      <div style="display:flex;gap:.5rem;">
+        <button id="range-7"  onclick="setRange(7)"  style="padding:.35rem .75rem;border-radius:100px;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;background:#A855F7;color:#fff;border:none;">7d</button>
+        <button id="range-30" onclick="setRange(30)" style="padding:.35rem .75rem;border-radius:100px;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;background:#222;color:#888;border:1px solid rgba(255,255,255,.08);">30d</button>
+        <button id="range-all" onclick="setRange(0)" style="padding:.35rem .75rem;border-radius:100px;font-family:inherit;font-size:.72rem;font-weight:700;cursor:pointer;background:#222;color:#888;border:1px solid rgba(255,255,255,.08);">All</button>
+      </div>
+    </div>
+
+    <!-- Summary cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.25rem;">
+      <div style="background:#222;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1rem;text-align:center;">
+        <div id="stat-total" style="font-size:2rem;font-weight:800;background:linear-gradient(135deg,#A855F7,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</div>
+        <div style="font-size:.72rem;color:#888;margin-top:2px;">Total Clicks</div>
+      </div>
+      <div style="background:#222;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:1rem;text-align:center;">
+        <div id="stat-today" style="font-size:2rem;font-weight:800;background:linear-gradient(135deg,#22C55E,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</div>
+        <div style="font-size:.72rem;color:#888;margin-top:2px;">Today</div>
+      </div>
+    </div>
+
+    <!-- Per-link breakdown -->
+    <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;">Clicks per link</div>
+    <div id="link-stats" style="margin-bottom:1.25rem;">
+      <div style="text-align:center;color:#888;font-size:.82rem;padding:1rem;">Loading stats...</div>
+    </div>
+
+    <!-- Recent clicks -->
+    <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;">Recent Activity</div>
+    <div id="recent-clicks">
+      <div style="text-align:center;color:#888;font-size:.82rem;padding:1rem;">No clicks yet — share your page to get started!</div>
+    </div>
+
+    <button onclick="loadAnalytics()" style="width:100%;margin-top:1rem;padding:.65rem;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);border-radius:11px;color:#A855F7;font-family:inherit;font-weight:700;font-size:.8rem;cursor:pointer;">↻ Refresh Stats</button>
   </div>
 </div>
 ```
@@ -189,16 +202,15 @@
   <div style="border:1px solid rgba(255,255,255,.08);border-radius:22px;background:#0D0D0D;padding:1.25rem;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
       <div style="display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#888;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;display:inline-block;animation:blink 1.5s infinite;"></span>
-        Live Preview
+        <span style="width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 6px #22C55E;display:inline-block;"></span>Live Preview
       </div>
       <button onclick="switchTab('publish')" class="btn btn-grad btn-sm">Publish →</button>
     </div>
     <div style="display:flex;justify-content:center;">
       <div id="preview-phone" style="width:200px;min-height:300px;border-radius:26px;padding:14px 12px 18px;border:1px solid rgba(255,255,255,.08);background:#181818;transition:background .3s;">
         <div id="pp-avatar" style="width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🌟</div>
-        <div id="pp-name" style="text-align:center;font-weight:800;font-size:.85rem;margin-bottom:2px;color:#fff;">Your Name</div>
-        <div id="pp-bio" style="text-align:center;font-size:.64rem;color:rgba(255,255,255,.5);margin:0 5px 11px;line-height:1.4;">Creator · Maker · Dreamer ✨</div>
+        <div id="pp-name"   style="text-align:center;font-weight:800;font-size:.85rem;margin-bottom:2px;color:#fff;"></div>
+        <div id="pp-bio"    style="text-align:center;font-size:.64rem;color:rgba(255,255,255,.5);margin:0 5px 11px;line-height:1.4;"></div>
         <div id="pp-links"></div>
       </div>
     </div>
@@ -213,21 +225,16 @@
   <p style="text-align:center;color:#888;font-size:.9rem;margin:0 auto 2rem;max-width:280px;line-height:1.6;">Everything you need to stand out online.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
     <div style="grid-column:span 2;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.5rem;margin-bottom:.5rem;">⚡</div><div style="font-size:.88rem;font-weight:800;margin-bottom:.3rem;">Live in 60 seconds</div><div style="font-size:.76rem;color:#888;line-height:1.5;">No account needed. Build, copy your link, start sharing instantly.</div></div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">🎨</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Bold themes</div><div style="font-size:.72rem;color:#888;line-height:1.5;">10 stunning themes.</div></div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">📱</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Mobile first</div><div style="font-size:.72rem;color:#888;line-height:1.5;">Perfect on every phone.</div></div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">📊</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Analytics <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div><div style="font-size:.72rem;color:#888;line-height:1.5;">Track clicks in real time.</div></div>
-    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">🌐</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Custom domain <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div><div style="font-size:.72rem;color:#888;line-height:1.5;">Connect stackd.bio.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">🎨</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Bold themes</div><div style="font-size:.72rem;color:#888;">10 stunning themes.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">📊</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Click tracking</div><div style="font-size:.72rem;color:#888;">See who's clicking what.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">📱</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Mobile first</div><div style="font-size:.72rem;color:#888;">Perfect on every phone.</div></div>
+    <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:1.2rem;"><div style="font-size:1.4rem;margin-bottom:.45rem;">🌐</div><div style="font-size:.82rem;font-weight:800;margin-bottom:.25rem;">Custom domain <span style="background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.6rem;font-weight:800;padding:.15rem .5rem;border-radius:100px;vertical-align:middle;">PRO</span></div><div style="font-size:.72rem;color:#888;">Connect stackd.bio.</div></div>
   </div>
 </section>
 
 <!-- ── AD SLOT 2 ── -->
 
-<div style="margin:0 1.25rem 1.5rem;">
-  <div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;">
-    <div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div>
-    <span style="font-size:.72rem;color:#444;">[Google AdSense Rectangle]</span>
-  </div>
-</div>
+<div style="margin:0 1.25rem 1.5rem;"><div style="background:#181818;border:1px dashed rgba(255,255,255,.06);border-radius:12px;padding:1rem;text-align:center;"><div style="font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:.35rem;">Advertisement</div><span style="font-size:.72rem;color:#444;">[Google AdSense Rectangle]</span></div></div>
 
 <!-- ── PRICING ── -->
 
@@ -235,20 +242,18 @@
   <div style="text-align:center;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#A855F7;margin-bottom:.5rem;">✦ Pricing ✦</div>
   <h2 style="font-size:clamp(1.75rem,5vw,2.3rem);font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:.5rem;">Simple pricing</h2>
   <p style="text-align:center;color:#888;font-size:.9rem;margin:0 auto 2rem;max-width:280px;line-height:1.6;">Free forever for the basics. Upgrade when you're ready.</p>
-  <!-- Free -->
   <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:1.5rem;margin-bottom:1rem;">
     <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Free</div>
     <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;">$0 <small style="font-size:.85rem;font-weight:400;color:#888;">/ forever</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>5 links</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>3 color themes</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Click tracking</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Stackd subdomain</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Analytics</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Custom domain</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Custom domain</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;opacity:.4;"><span style="color:#444;font-weight:800;">✕</span>Remove branding</li>
     </ul>
     <a href="#builder" class="btn btn-outline btn-lg" style="display:flex;">Start Building Free</a>
   </div>
-  <!-- Pro -->
   <div style="background:#181818;border:1px solid #A855F7;border-radius:22px;padding:1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 0 40px rgba(168,85,247,.12);">
     <div style="position:absolute;top:0;right:0;background:linear-gradient(135deg,#A855F7,#EC4899);color:#fff;font-size:.62rem;font-weight:800;padding:.3rem .9rem;border-bottom-left-radius:12px;text-transform:uppercase;">Most Popular</div>
     <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Pro</div>
@@ -256,21 +261,19 @@
     <ul style="list-style:none;margin-bottom:1.4rem;">
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Unlimited links</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>All 10 themes + custom</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Analytics dashboard</li>
+      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Advanced analytics</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Custom domain</li>
       <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Remove branding</li>
     </ul>
-    <button class="btn btn-grad btn-lg" onclick="showToast('Pro launching soon! Join waitlist 🎉')">Upgrade to Pro ✦</button>
+    <button class="btn btn-grad btn-lg" onclick="showToast('Pro launching soon! 🎉')">Upgrade to Pro ✦</button>
   </div>
-  <!-- Business -->
   <div style="background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:1.5rem;">
     <div style="font-size:.75rem;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.45rem;">Business</div>
     <div style="font-size:2.3rem;font-weight:800;letter-spacing:-1.5px;margin-bottom:1.2rem;"><sup style="font-size:1rem;vertical-align:super;font-weight:600;">$</sup>19 <small style="font-size:.85rem;font-weight:400;color:#888;">/ month</small></div>
     <ul style="list-style:none;margin-bottom:1.4rem;">
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>Everything in Pro</li>
       <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>5 team seats</li>
-      <li style="font-size:.83rem;padding:.42rem 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>API access</li>
-      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>White-label option</li>
+      <li style="font-size:.83rem;padding:.42rem 0;display:flex;gap:.55rem;color:#888;"><span style="color:#22C55E;font-weight:800;">✓</span>API access</li>
     </ul>
     <button class="btn btn-outline btn-lg" onclick="showToast('Contact us: hello@stackd.bio')">Contact Sales</button>
   </div>
@@ -313,33 +316,16 @@
 <div id="auth-modal" onclick="if(event.target===this)closeAuthModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:500;align-items:flex-end;justify-content:center;">
   <div style="background:#181818;border:1px solid rgba(255,255,255,.1);border-radius:22px 22px 0 0;padding:1.5rem 1.25rem 2.5rem;width:100%;max-width:480px;animation:slideUp .3s ease;">
     <div style="width:36px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin:0 auto 1.5rem;"></div>
-    <div id="auth-title" style="font-weight:800;font-size:1.1rem;margin-bottom:.35rem;">Log In</div>
+    <div id="auth-title"    style="font-weight:800;font-size:1.1rem;margin-bottom:.35rem;">Log In</div>
     <div id="auth-subtitle" style="font-size:.82rem;color:#888;margin-bottom:1.25rem;">Welcome back to Stackd</div>
-
-```
-<!-- Error message -->
-<div id="auth-error" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:.65rem .9rem;font-size:.8rem;color:#EF4444;margin-bottom:1rem;"></div>
-
-<form id="auth-form" onsubmit="handleAuth(event)">
-  <div style="margin-bottom:1rem;">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Email</label>
-    <input type="email" id="auth-email" placeholder="you@example.com" required autocomplete="email" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-  </div>
-  <div style="margin-bottom:1.25rem;" id="auth-pass-wrap">
-    <label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Password</label>
-    <input type="password" id="auth-password" placeholder="8+ characters" autocomplete="current-password" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;">
-  </div>
-  <button type="submit" id="auth-submit" class="btn btn-grad btn-lg" style="font-size:.95rem;">Log In</button>
-</form>
-
-<div style="text-align:center;margin-top:1rem;">
-  <button id="auth-toggle" onclick="toggleAuthMode()" style="background:none;border:none;color:#888;font-family:inherit;font-size:.82rem;cursor:pointer;padding:.5rem;">Don't have an account? <span style="color:#A855F7;font-weight:700;">Sign up free</span></button>
-</div>
-<div style="text-align:center;margin-top:.25rem;">
-  <button onclick="handleForgotPassword()" style="background:none;border:none;color:#555;font-family:inherit;font-size:.75rem;cursor:pointer;padding:.25rem;">Forgot password?</button>
-</div>
-```
-
+    <div id="auth-error" style="display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);border-radius:10px;padding:.65rem .9rem;font-size:.8rem;color:#EF4444;margin-bottom:1rem;"></div>
+    <form id="auth-form" onsubmit="handleAuth(event)">
+      <div style="margin-bottom:1rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Email</label><input type="email" id="auth-email" placeholder="you@example.com" required autocomplete="email" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;"></div>
+      <div style="margin-bottom:1.25rem;"><label style="display:block;font-size:.73rem;font-weight:600;color:#888;margin-bottom:.38rem;">Password</label><input type="password" id="auth-password" placeholder="8+ characters" autocomplete="current-password" style="width:100%;background:#222;border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:.7rem .9rem;color:#fff;font-family:inherit;font-size:.9rem;outline:none;box-sizing:border-box;"></div>
+      <button type="submit" id="auth-submit" class="btn btn-grad btn-lg" style="font-size:.95rem;">Log In</button>
+    </form>
+    <div style="text-align:center;margin-top:1rem;"><button id="auth-toggle" onclick="toggleAuthMode()" style="background:none;border:none;color:#888;font-family:inherit;font-size:.82rem;cursor:pointer;padding:.5rem;">Don't have an account? <span style="color:#A855F7;font-weight:700;">Sign up free</span></button></div>
+    <div style="text-align:center;margin-top:.25rem;"><button onclick="handleForgotPassword()" style="background:none;border:none;color:#555;font-family:inherit;font-size:.75rem;cursor:pointer;padding:.25rem;">Forgot password?</button></div>
   </div>
 </div>
 
@@ -348,22 +334,23 @@
 <div id="toast" style="position:fixed;bottom:calc(1.5rem + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(80px);background:#fff;color:#000;font-family:inherit;font-weight:700;font-size:.85rem;padding:.72rem 1.4rem;border-radius:100px;opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4);pointer-events:none;"></div>
 
 <style>
-@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
-@keyframes blink   { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
 </style>
 
 <script>
-// ── SUPABASE INIT ────────────────────────────────────────────
-const SUPABASE_URL  = 'https://yencpkorwedidwbkquqc.supabase.co';
-const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllbmNwa29yd2VkaWR3YmtxdXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjE0NTEsImV4cCI6MjA4OTMzNzQ1MX0.6MsQRtoJbdKSPooEPHgJhhbff_TaPwAQCEfeH0H_Nkg';
+// ── SUPABASE ─────────────────────────────────────────────────
+const SUPABASE_URL = 'https://yencpkorwedidwbkquqc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllbmNwa29yd2VkaWR3YmtxdXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjE0NTEsImV4cCI6MjA4OTMzNzQ1MX0.6MsQRtoJbdKSPooEPHgJhhbff_TaPwAQCEfeH0H_Nkg';
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── APP STATE ────────────────────────────────────────────────
+// ── STATE ────────────────────────────────────────────────────
 const FREE_LIMIT = 5;
 let currentUser  = null;
+let currentPageId = null;
 let isPro        = false;
 let saveTimer    = null;
 let activeTheme  = 0;
+let analyticsRange = 7;
 
 let links = [
   { emoji:'📸', label:'Instagram', url:'https://instagram.com' },
@@ -372,42 +359,35 @@ let links = [
 ];
 
 const THEMES = [
-  { id:'purple', bg:'#0D0D0D', accent:'#A855F7', text:'#FFF',     grad:'135deg,#A855F7,#EC4899' },
-  { id:'cyan',   bg:'#020F12', accent:'#06B6D4', text:'#F0FFFE',  grad:'135deg,#06B6D4,#6366F1' },
-  { id:'lime',   bg:'#080C00', accent:'#84CC16', text:'#F7FFE0',  grad:'135deg,#84CC16,#22C55E' },
-  { id:'rose',   bg:'#0F0508', accent:'#F43F5E', text:'#FFF0F3',  grad:'135deg,#F43F5E,#FB923C' },
-  { id:'indigo', bg:'#06060F', accent:'#6366F1', text:'#F0F0FF',  grad:'135deg,#6366F1,#A855F7' },
-  { id:'amber',  bg:'#0C0800', accent:'#F59E0B', text:'#FFFBEB',  grad:'135deg,#F59E0B,#EF4444' },
-  { id:'teal',   bg:'#00080A', accent:'#14B8A6', text:'#F0FFFD',  grad:'135deg,#14B8A6,#6366F1' },
-  { id:'pink',   bg:'#0F0008', accent:'#EC4899', text:'#FFF0F8',  grad:'135deg,#EC4899,#A855F7' },
-  { id:'orange', bg:'#0C0400', accent:'#F97316', text:'#FFF7F0',  grad:'135deg,#F97316,#EAB308' },
-  { id:'white',  bg:'#F5F5F5', accent:'#6366F1', text:'#111',     grad:'135deg,#6366F1,#A855F7' },
+  { id:'purple', bg:'#0D0D0D', accent:'#A855F7', text:'#FFF',    grad:'135deg,#A855F7,#EC4899' },
+  { id:'cyan',   bg:'#020F12', accent:'#06B6D4', text:'#F0FFFE', grad:'135deg,#06B6D4,#6366F1' },
+  { id:'lime',   bg:'#080C00', accent:'#84CC16', text:'#F7FFE0', grad:'135deg,#84CC16,#22C55E' },
+  { id:'rose',   bg:'#0F0508', accent:'#F43F5E', text:'#FFF0F3', grad:'135deg,#F43F5E,#FB923C' },
+  { id:'indigo', bg:'#06060F', accent:'#6366F1', text:'#F0F0FF', grad:'135deg,#6366F1,#A855F7' },
+  { id:'amber',  bg:'#0C0800', accent:'#F59E0B', text:'#FFFBEB', grad:'135deg,#F59E0B,#EF4444' },
+  { id:'teal',   bg:'#00080A', accent:'#14B8A6', text:'#F0FFFD', grad:'135deg,#14B8A6,#6366F1' },
+  { id:'pink',   bg:'#0F0008', accent:'#EC4899', text:'#FFF0F8', grad:'135deg,#EC4899,#A855F7' },
+  { id:'orange', bg:'#0C0400', accent:'#F97316', text:'#FFF7F0', grad:'135deg,#F97316,#EAB308' },
+  { id:'white',  bg:'#F5F5F5', accent:'#6366F1', text:'#111',    grad:'135deg,#6366F1,#A855F7' },
 ];
 
-// ── AUTH STATE LISTENER ──────────────────────────────────────
+// ── AUTH STATE ───────────────────────────────────────────────
 sb.auth.onAuthStateChange(function(event, session) {
   currentUser = session ? session.user : null;
-  if (currentUser) {
-    onLoginSuccess();
-    loadPageFromDB();
-  } else {
-    onLogout();
-  }
+  if (currentUser) { onLoginSuccess(); loadPageFromDB(); }
+  else { onLogout(); }
 });
 
-// ── AUTH UI UPDATES ──────────────────────────────────────────
 function onLoginSuccess() {
   document.getElementById('nav-login-btn').style.display = 'none';
   var menu = document.getElementById('nav-user-menu');
   menu.style.display = 'flex';
-  // Show first letter of email as avatar
-  var initials = currentUser.email ? currentUser.email[0].toUpperCase() : '?';
-  document.getElementById('nav-avatar').textContent = initials;
-  // Show save bar
+  document.getElementById('nav-avatar').textContent = currentUser.email[0].toUpperCase();
   document.getElementById('save-bar').style.display = 'flex';
-  // Update publish tab CTAs
   document.getElementById('publish-save-cta').style.display  = 'none';
   document.getElementById('publish-saved-cta').style.display = 'block';
+  document.getElementById('analytics-gate').style.display      = 'none';
+  document.getElementById('analytics-dashboard').style.display = 'block';
 }
 
 function onLogout() {
@@ -416,107 +396,140 @@ function onLogout() {
   document.getElementById('save-bar').style.display       = 'none';
   document.getElementById('publish-save-cta').style.display  = 'block';
   document.getElementById('publish-saved-cta').style.display = 'none';
+  document.getElementById('analytics-gate').style.display      = 'block';
+  document.getElementById('analytics-dashboard').style.display = 'none';
+  currentPageId = null;
 }
 
-// ── AUTH MODAL ───────────────────────────────────────────────
-var authMode = 'login';
-
-function openAuthModal(mode) {
-  authMode = mode || 'login';
-  setAuthMode(authMode);
-  document.getElementById('auth-modal').style.display = 'flex';
-  document.getElementById('auth-error').style.display = 'none';
-  document.getElementById('auth-email').value    = '';
-  document.getElementById('auth-password').value = '';
-  setTimeout(function(){ document.getElementById('auth-email').focus(); }, 300);
-}
-
-function closeAuthModal() {
-  document.getElementById('auth-modal').style.display = 'none';
-}
-
-function setAuthMode(mode) {
-  authMode = mode;
-  var isLogin = mode === 'login';
-  var isSignup = mode === 'signup';
-  document.getElementById('auth-title').textContent    = isSignup ? 'Create Account' : 'Log In';
-  document.getElementById('auth-subtitle').textContent = isSignup ? 'Join Stackd — free forever' : 'Welcome back to Stackd';
-  document.getElementById('auth-submit').textContent   = isSignup ? 'Create Free Account' : 'Log In';
-  document.getElementById('auth-pass-wrap').style.display = '';
-  document.getElementById('auth-toggle').innerHTML = isSignup
-    ? 'Already have an account? <span style="color:#A855F7;font-weight:700;">Log in</span>'
-    : "Don't have an account? <span style='color:#A855F7;font-weight:700;'>Sign up free</span>";
-}
-
-function toggleAuthMode() {
-  setAuthMode(authMode === 'login' ? 'signup' : 'login');
-  document.getElementById('auth-error').style.display = 'none';
-}
-
-async function handleAuth(e) {
-  e.preventDefault();
-  var email    = document.getElementById('auth-email').value.trim();
-  var password = document.getElementById('auth-password').value;
-  var btn      = document.getElementById('auth-submit');
-  var errEl    = document.getElementById('auth-error');
-
-  if (!email) { showAuthError('Please enter your email'); return; }
-  if (authMode !== 'reset' && !password) { showAuthError('Please enter your password'); return; }
-  if (password && password.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
-
-  btn.disabled    = true;
-  btn.textContent = authMode === 'signup' ? 'Creating account...' : 'Logging in...';
-  errEl.style.display = 'none';
-
-  var result;
-  if (authMode === 'signup') {
-    result = await sb.auth.signUp({ email: email, password: password });
-    if (!result.error) {
-      showToast('Check your email to confirm your account! 📬', 'success');
-      closeAuthModal();
-    }
-  } else {
-    result = await sb.auth.signInWithPassword({ email: email, password: password });
-    if (!result.error) {
-      showToast('Welcome back! 👋', 'success');
-      closeAuthModal();
-    }
+// ── CLICK TRACKING ───────────────────────────────────────────
+async function trackClick(linkLabel, linkUrl) {
+  if (!currentPageId || !currentUser) return;
+  try {
+    await sb.from('clicks').insert({
+      page_id:    currentPageId,
+      user_id:    currentUser.id,
+      link_label: linkLabel,
+      link_url:   linkUrl,
+      referrer:   document.referrer || null,
+      clicked_at: new Date().toISOString(),
+    });
+  } catch(e) {
+    // Silent fail — never interrupt the user
+    console.warn('Click track failed:', e);
   }
-
-  if (result.error) {
-    showAuthError(result.error.message);
-  }
-
-  btn.disabled    = false;
-  btn.textContent = authMode === 'signup' ? 'Create Free Account' : 'Log In';
 }
 
-async function handleForgotPassword() {
-  var email = document.getElementById('auth-email').value.trim();
-  if (!email) { showAuthError('Enter your email above first'); return; }
-  var result = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin
+// ── ANALYTICS DASHBOARD ──────────────────────────────────────
+function setRange(days) {
+  analyticsRange = days;
+  // Update button styles
+  ['7','30','all'].forEach(function(r) {
+    var btn = document.getElementById('range-' + r);
+    if (!btn) return;
+    var active = (r === 'all' && days === 0) || (r === String(days));
+    btn.style.background = active ? '#A855F7' : '#222';
+    btn.style.color      = active ? '#fff' : '#888';
+    btn.style.border     = active ? 'none' : '1px solid rgba(255,255,255,.08)';
   });
+  loadAnalytics();
+}
+
+async function loadAnalytics() {
+  if (!currentUser || !currentPageId) return;
+
+  var linkStatsEl   = document.getElementById('link-stats');
+  var recentEl      = document.getElementById('recent-clicks');
+  var totalEl       = document.getElementById('stat-total');
+  var todayEl       = document.getElementById('stat-today');
+
+  linkStatsEl.innerHTML = '<div style="text-align:center;color:#888;font-size:.8rem;padding:.5rem;">Loading...</div>';
+
+  // Build date filter
+  var since = null;
+  if (analyticsRange > 0) {
+    since = new Date();
+    since.setDate(since.getDate() - analyticsRange);
+    since = since.toISOString();
+  }
+
+  // Fetch all clicks for this page
+  var query = sb.from('clicks')
+    .select('*')
+    .eq('page_id', currentPageId)
+    .order('clicked_at', { ascending: false });
+
+  if (since) query = query.gte('clicked_at', since);
+
+  var result = await query;
+
   if (result.error) {
-    showAuthError(result.error.message);
+    linkStatsEl.innerHTML = '<div style="color:#EF4444;font-size:.8rem;text-align:center;">Failed to load stats</div>';
+    return;
+  }
+
+  var clicks = result.data || [];
+
+  // Total clicks
+  totalEl.textContent = clicks.length;
+
+  // Today's clicks
+  var todayStr = new Date().toISOString().slice(0, 10);
+  var todayCount = clicks.filter(function(c) {
+    return c.clicked_at && c.clicked_at.slice(0, 10) === todayStr;
+  }).length;
+  todayEl.textContent = todayCount;
+
+  // Per-link breakdown
+  var linkCounts = {};
+  clicks.forEach(function(c) {
+    var key = c.link_label || c.link_url || 'Unknown';
+    linkCounts[key] = (linkCounts[key] || 0) + 1;
+  });
+
+  var sortedLinks = Object.keys(linkCounts).sort(function(a, b) {
+    return linkCounts[b] - linkCounts[a];
+  });
+
+  if (sortedLinks.length === 0) {
+    linkStatsEl.innerHTML = '<div style="text-align:center;color:#888;font-size:.82rem;padding:1rem;background:#222;border-radius:12px;">No clicks yet in this period.<br>Share your page to start tracking!</div>';
   } else {
-    showToast('Password reset email sent! Check your inbox 📬', 'success');
-    closeAuthModal();
+    var maxCount = linkCounts[sortedLinks[0]] || 1;
+    linkStatsEl.innerHTML = sortedLinks.map(function(label) {
+      var count = linkCounts[label];
+      var pct   = Math.round((count / maxCount) * 100);
+      return '<div style="margin-bottom:.75rem;">' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem;">' +
+          '<span style="font-size:.78rem;font-weight:600;color:#fff;">' + escHtml(label) + '</span>' +
+          '<span style="font-size:.78rem;font-weight:800;color:#A855F7;">' + count + ' click' + (count !== 1 ? 's' : '') + '</span>' +
+        '</div>' +
+        '<div style="height:6px;background:#2A2A2A;border-radius:100px;overflow:hidden;">' +
+          '<div style="height:100%;width:' + pct + '%;background:linear-gradient(90deg,#A855F7,#EC4899);border-radius:100px;transition:width .5s ease;"></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Recent activity (last 10)
+  var recent = clicks.slice(0, 10);
+  if (recent.length === 0) {
+    recentEl.innerHTML = '<div style="text-align:center;color:#888;font-size:.82rem;padding:1rem;">No clicks yet — share your page!</div>';
+  } else {
+    recentEl.innerHTML = recent.map(function(c) {
+      var date = new Date(c.clicked_at);
+      var timeStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' }) +
+                    ' · ' + date.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+      return '<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.05);">' +
+        '<div>' +
+          '<div style="font-size:.78rem;font-weight:600;color:#fff;">' + escHtml(c.link_label || 'Link') + '</div>' +
+          '<div style="font-size:.65rem;color:#555;margin-top:1px;">' + timeStr + '</div>' +
+        '</div>' +
+        '<span style="font-size:.65rem;color:#888;background:#222;padding:.2rem .6rem;border-radius:100px;">click</span>' +
+      '</div>';
+    }).join('');
   }
 }
 
-function showAuthError(msg) {
-  var el = document.getElementById('auth-error');
-  el.textContent    = msg;
-  el.style.display  = 'block';
-}
-
-async function handleLogout() {
-  await sb.auth.signOut();
-  showToast('Logged out. See you soon! 👋');
-}
-
-// ── SAVE / LOAD PAGE ─────────────────────────────────────────
+// ── SAVE / LOAD ──────────────────────────────────────────────
 function getPageData() {
   return {
     name:     document.getElementById('inp-name').value,
@@ -536,65 +549,47 @@ async function savePage() {
   var username = data.username || ('user_' + currentUser.id.slice(0,8));
   setSaveStatus('Saving...');
 
-  // First check if a row exists
-  var existing = await sb.from('pages')
-    .select('id')
-    .eq('user_id', currentUser.id)
-    .maybeSingle();
-
+  var existing = await sb.from('pages').select('id').eq('user_id', currentUser.id).maybeSingle();
   var result;
   if (existing.data) {
-    // Row exists — update it
-    result = await sb.from('pages')
-      .update({
-        username:   username,
-        page_data:  data,
-        updated_at: new Date().toISOString(),
-      })
-      .eq('user_id', currentUser.id);
+    result = await sb.from('pages').update({
+      username:   username,
+      page_data:  data,
+      updated_at: new Date().toISOString(),
+    }).eq('user_id', currentUser.id);
   } else {
-    // No row yet — insert fresh
-    result = await sb.from('pages')
-      .insert({
-        user_id:    currentUser.id,
-        username:   username,
-        page_data:  data,
-        updated_at: new Date().toISOString(),
-      });
+    result = await sb.from('pages').insert({
+      user_id:    currentUser.id,
+      username:   username,
+      page_data:  data,
+      updated_at: new Date().toISOString(),
+    });
   }
 
-  if (result.error) {
-    setSaveStatus('Save failed ✗');
-    console.error('Save error:', result.error.message);
-  } else {
-    setSaveStatus('All changes saved ✓');
-  }
+  if (result.error) { setSaveStatus('Save failed ✗'); console.error(result.error.message); }
+  else              { setSaveStatus('All changes saved ✓'); }
 }
-
 
 async function loadPageFromDB() {
   if (!currentUser) return;
-  var result = await sb.from('pages')
-    .select('page_data')
-    .eq('user_id', currentUser.id)
-    .single();
-
-  if (result.data && result.data.page_data) {
-    applyPageData(result.data.page_data);
+  var result = await sb.from('pages').select('id, page_data').eq('user_id', currentUser.id).maybeSingle();
+  if (result.data) {
+    currentPageId = result.data.id;
+    if (result.data.page_data) applyPageData(result.data.page_data);
     setSaveStatus('Page loaded ✓');
   }
 }
 
-function applyPageData(data) {
-  if (data.name)     document.getElementById('inp-name').value     = data.name;
-  if (data.bio)      document.getElementById('inp-bio').value      = data.bio;
-  if (data.emoji)    document.getElementById('inp-emoji').value    = data.emoji;
-  if (data.username) document.getElementById('inp-username').value = data.username;
-  if (data.btnStyle) document.getElementById('btn-style').value    = data.btnStyle;
-  if (data.bgStyle)  document.getElementById('bg-style').value     = data.bgStyle;
-  if (data.links)    links = data.links;
-  if (data.themeId) {
-    var idx = THEMES.findIndex(function(t){ return t.id === data.themeId; });
+function applyPageData(d) {
+  if (d.name)     document.getElementById('inp-name').value     = d.name;
+  if (d.bio)      document.getElementById('inp-bio').value      = d.bio;
+  if (d.emoji)    document.getElementById('inp-emoji').value    = d.emoji;
+  if (d.username) document.getElementById('inp-username').value = d.username;
+  if (d.btnStyle) document.getElementById('btn-style').value    = d.btnStyle;
+  if (d.bgStyle)  document.getElementById('bg-style').value     = d.bgStyle;
+  if (d.links)    links = d.links;
+  if (d.themeId) {
+    var idx = THEMES.findIndex(function(t){ return t.id === d.themeId; });
     if (idx >= 0) activeTheme = idx;
   }
   renderLinks();
@@ -602,12 +597,8 @@ function applyPageData(data) {
   updatePreview();
 }
 
-function setSaveStatus(msg) {
-  var el = document.getElementById('save-status');
-  if (el) el.textContent = msg;
-}
+function setSaveStatus(msg) { var el = document.getElementById('save-status'); if (el) el.textContent = msg; }
 
-// Auto-save with debounce
 function onFieldChange() {
   updatePreview();
   if (!currentUser) return;
@@ -618,26 +609,27 @@ function onFieldChange() {
 
 // ── TABS ─────────────────────────────────────────────────────
 function switchTab(name) {
-  ['profile','links','theme','publish'].forEach(function(p) {
+  ['profile','links','theme','publish','analytics'].forEach(function(p) {
     var panel = document.getElementById('tab-'  + p);
     var btn   = document.getElementById('tbtn-' + p);
     if (!panel || !btn) return;
     var active = p === name;
-    panel.style.display      = active ? 'block' : 'none';
-    btn.style.color          = active ? '#A855F7' : '#888';
-    btn.style.borderBottom   = active ? '2px solid #A855F7' : '2px solid transparent';
+    panel.style.display    = active ? 'block' : 'none';
+    btn.style.color        = active ? '#A855F7' : '#888';
+    btn.style.borderBottom = active ? '2px solid #A855F7' : '2px solid transparent';
   });
+  if (name === 'analytics' && currentUser) loadAnalytics();
 }
 
-// ── THEME GRID ────────────────────────────────────────────────
+// ── THEME ────────────────────────────────────────────────────
 function buildThemeGrid() {
   var grid = document.getElementById('theme-grid');
   if (!grid) return;
   grid.innerHTML = '';
   THEMES.forEach(function(t, i) {
     var d = document.createElement('div');
-    d.style.cssText = 'height:40px;border-radius:11px;cursor:pointer;border:2px solid ' + (i===0?'#fff':'transparent') + ';position:relative;overflow:hidden;background:linear-gradient(' + t.grad + ');transition:transform .15s;';
-    if (i === 0) d.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>';
+    d.style.cssText = 'height:40px;border-radius:11px;cursor:pointer;border:2px solid ' + (i===0?'#fff':'transparent') + ';position:relative;overflow:hidden;background:linear-gradient(' + t.grad + ');';
+    if (i === 0) d.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;">✓</div>';
     (function(idx){ d.onclick = function(){ setTheme(idx); }; })(i);
     grid.appendChild(d);
   });
@@ -646,18 +638,14 @@ function buildThemeGrid() {
 function refreshThemeGrid() {
   var swatches = document.getElementById('theme-grid').children;
   for (var j = 0; j < swatches.length; j++) {
-    swatches[j].style.border  = j === activeTheme ? '2px solid #fff' : '2px solid transparent';
-    swatches[j].innerHTML     = j === activeTheme ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;text-shadow:0 1px 4px rgba(0,0,0,.6);">✓</div>' : '';
+    swatches[j].style.border = j === activeTheme ? '2px solid #fff' : '2px solid transparent';
+    swatches[j].innerHTML    = j === activeTheme ? '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.85rem;">✓</div>' : '';
   }
 }
 
-function setTheme(i) {
-  activeTheme = i;
-  refreshThemeGrid();
-  onFieldChange();
-}
+function setTheme(i) { activeTheme = i; refreshThemeGrid(); onFieldChange(); }
 
-// ── LINK LIST ─────────────────────────────────────────────────
+// ── LINKS ────────────────────────────────────────────────────
 function renderLinks() {
   var list = document.getElementById('link-list');
   if (!list) return;
@@ -674,52 +662,32 @@ function renderLinks() {
       '<input type="url" value="' + escHtml(link.url) + '" data-i="' + i + '" data-f="url" placeholder="https://..." style="width:100%;background:#181818;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.6rem .8rem;color:#fff;font-family:inherit;font-size:.88rem;outline:none;box-sizing:border-box;">';
     list.appendChild(card);
   });
-
   list.querySelectorAll('input[data-i]').forEach(function(inp) {
-    inp.oninput = function() {
-      links[parseInt(inp.dataset.i)][inp.dataset.f] = inp.value;
-      onFieldChange();
-    };
+    inp.oninput = function() { links[parseInt(inp.dataset.i)][inp.dataset.f] = inp.value; onFieldChange(); };
   });
-
   updatePreview();
 }
 
 function addLink() {
-  if (!isPro && links.length >= FREE_LIMIT) {
-    showToast('Free plan: ' + FREE_LIMIT + ' links max. Upgrade to Pro! ✦', 'error');
-    return;
-  }
+  if (!isPro && links.length >= FREE_LIMIT) { showToast('Free plan: ' + FREE_LIMIT + ' links max. Upgrade to Pro! ✦', 'error'); return; }
   links.push({ emoji:'✨', label:'New Link', url:'https://' });
-  renderLinks();
-  onFieldChange();
+  renderLinks(); onFieldChange();
 }
+function removeLink(i) { links.splice(i,1); renderLinks(); onFieldChange(); }
 
-function removeLink(i) {
-  links.splice(i, 1);
-  renderLinks();
-  onFieldChange();
-}
-
-function escHtml(str) {
-  return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ── LIVE PREVIEW ──────────────────────────────────────────────
+// ── LIVE PREVIEW ─────────────────────────────────────────────
 function updatePreview() {
   var t        = THEMES[activeTheme];
-  var name     = (document.getElementById('inp-name')     || {}).value || 'Your Name';
-  var bio      = (document.getElementById('inp-bio')      || {}).value || '';
-  var emoji    = (document.getElementById('inp-emoji')    || {}).value || '🌟';
-  var username = (document.getElementById('inp-username') || {}).value || 'yourname';
-  var btnStyle = (document.getElementById('btn-style')    || {}).value || 'pill';
-  var bgStyle  = (document.getElementById('bg-style')     || {}).value || 'dark';
+  var name     = (document.getElementById('inp-name')     ||{}).value || '';
+  var bio      = (document.getElementById('inp-bio')      ||{}).value || '';
+  var emoji    = (document.getElementById('inp-emoji')    ||{}).value || '🌟';
+  var username = (document.getElementById('inp-username') ||{}).value || 'yourname';
+  var btnStyle = (document.getElementById('btn-style')    ||{}).value || 'pill';
+  var bgStyle  = (document.getElementById('bg-style')     ||{}).value || 'dark';
 
-  // Username hint
   var hint = document.getElementById('username-preview');
   if (hint) hint.textContent = username || 'yourname';
 
-  // Phone bg
   var phone = document.getElementById('preview-phone');
   if (!phone) return;
   var bg = t.bg;
@@ -727,84 +695,118 @@ function updatePreview() {
   if (bgStyle === 'light')    bg = '#F5F5F5';
   phone.style.background = bg;
 
-  // Button radius
   var br = btnStyle === 'square' ? '8px' : btnStyle === 'outline' ? '12px' : '100px';
 
-  // Avatar
   var av = document.getElementById('pp-avatar');
-  if (av) { av.textContent = emoji || '😊'; av.style.background = 'linear-gradient(' + t.grad + ')'; }
-
-  // Name & bio
+  if (av) { av.textContent = emoji; av.style.background = 'linear-gradient(' + t.grad + ')'; }
   var nm = document.getElementById('pp-name');
+  if (nm) { nm.textContent = name; nm.style.color = t.text; }
   var bi = document.getElementById('pp-bio');
-  if (nm) { nm.textContent = name || 'Your Name'; nm.style.color = t.text; }
-  if (bi)   bi.textContent = bio || '';
+  if (bi) bi.textContent = bio;
 
-  // Links
   var ld = document.getElementById('pp-links');
   if (!ld) return;
   ld.innerHTML = '';
   links.forEach(function(link) {
     var a = document.createElement('a');
     a.href = link.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    // Track click when preview link clicked
+    a.onclick = function(e) { trackClick(link.label, link.url); };
     var bgc, border, color;
-    if (btnStyle === 'outline') { bgc = 'transparent'; border = '1.5px solid ' + t.accent; color = t.accent; }
-    else                        { bgc = t.accent + '18'; border = '1px solid ' + t.accent + '33'; color = t.text; }
-    a.style.cssText = 'display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:' + br + ';font-size:.7rem;font-weight:700;margin-bottom:6px;text-decoration:none;background:' + bgc + ';border:' + border + ';color:' + color + ';';
-    a.innerHTML = '<span style="font-size:.95rem;">' + link.emoji + '</span><span style="flex:1;">' + escHtml(link.label) + '</span><span style="opacity:.4;font-size:.62rem;">→</span>';
+    if (btnStyle === 'outline') { bgc='transparent'; border='1.5px solid '+t.accent; color=t.accent; }
+    else                        { bgc=t.accent+'18'; border='1px solid '+t.accent+'33'; color=t.text; }
+    a.style.cssText = 'display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:'+br+';font-size:.7rem;font-weight:700;margin-bottom:6px;text-decoration:none;background:'+bgc+';border:'+border+';color:'+color+';';
+    a.innerHTML = '<span style="font-size:.95rem;">'+link.emoji+'</span><span style="flex:1;">'+escHtml(link.label)+'</span><span style="opacity:.4;font-size:.62rem;">→</span>';
     ld.appendChild(a);
   });
 
-  // Page URL
   var urlInp = document.getElementById('page-url');
   if (urlInp) urlInp.value = 'https://stackd.bio/' + (username || 'yourname');
 }
 
-// ── COPY / SHARE ──────────────────────────────────────────────
+// ── AUTH MODAL ───────────────────────────────────────────────
+var authMode = 'login';
+function openAuthModal(mode) {
+  authMode = mode || 'login';
+  setAuthMode(authMode);
+  document.getElementById('auth-modal').style.display = 'flex';
+  document.getElementById('auth-error').style.display = 'none';
+  document.getElementById('auth-email').value = '';
+  document.getElementById('auth-password').value = '';
+  setTimeout(function(){ document.getElementById('auth-email').focus(); }, 300);
+}
+function closeAuthModal() { document.getElementById('auth-modal').style.display = 'none'; }
+function setAuthMode(mode) {
+  authMode = mode;
+  var isSignup = mode === 'signup';
+  document.getElementById('auth-title').textContent    = isSignup ? 'Create Account' : 'Log In';
+  document.getElementById('auth-subtitle').textContent = isSignup ? 'Join Stackd — free forever' : 'Welcome back to Stackd';
+  document.getElementById('auth-submit').textContent   = isSignup ? 'Create Free Account' : 'Log In';
+  document.getElementById('auth-toggle').innerHTML     = isSignup
+    ? 'Already have an account? <span style="color:#A855F7;font-weight:700;">Log in</span>'
+    : "Don't have an account? <span style='color:#A855F7;font-weight:700;'>Sign up free</span>";
+}
+function toggleAuthMode() { setAuthMode(authMode === 'login' ? 'signup' : 'login'); document.getElementById('auth-error').style.display = 'none'; }
+
+async function handleAuth(e) {
+  e.preventDefault();
+  var email = document.getElementById('auth-email').value.trim();
+  var pass  = document.getElementById('auth-password').value;
+  var btn   = document.getElementById('auth-submit');
+  if (!email || !pass) return;
+  if (pass.length < 8) { showAuthError('Password must be at least 8 characters'); return; }
+  btn.disabled = true;
+  btn.textContent = authMode === 'signup' ? 'Creating account...' : 'Logging in...';
+  document.getElementById('auth-error').style.display = 'none';
+  var result = authMode === 'signup'
+    ? await sb.auth.signUp({ email:email, password:pass })
+    : await sb.auth.signInWithPassword({ email:email, password:pass });
+  if (result.error) { showAuthError(result.error.message); }
+  else { showToast(authMode === 'signup' ? 'Account created! Welcome 🎉' : 'Welcome back! 👋', 'success'); closeAuthModal(); }
+  btn.disabled = false;
+  btn.textContent = authMode === 'signup' ? 'Create Free Account' : 'Log In';
+}
+
+async function handleForgotPassword() {
+  var email = document.getElementById('auth-email').value.trim();
+  if (!email) { showAuthError('Enter your email above first'); return; }
+  var result = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin });
+  if (result.error) showAuthError(result.error.message);
+  else { showToast('Password reset email sent! 📬', 'success'); closeAuthModal(); }
+}
+function showAuthError(msg) { var el = document.getElementById('auth-error'); el.textContent = msg; el.style.display = 'block'; }
+async function handleLogout() { await sb.auth.signOut(); showToast('Logged out 👋'); }
+
+// ── COPY / SHARE ─────────────────────────────────────────────
 function copyURL() {
   var url = document.getElementById('page-url').value;
   var btn = document.getElementById('copy-btn');
-  var copy = function() {
-    btn.textContent = '✓ Copied'; btn.style.background = '#22C55E';
-    showToast('Link copied! 🎉', 'success');
-    setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#A855F7'; }, 2500);
-  };
-  if (navigator.clipboard) { navigator.clipboard.writeText(url).then(copy); }
-  else {
-    var el = document.createElement('textarea');
-    el.value = url; el.style.cssText = 'position:fixed;opacity:0;';
-    document.body.appendChild(el); el.select(); document.execCommand('copy');
-    document.body.removeChild(el); copy();
-  }
+  var done = function() { btn.textContent='✓ Copied'; btn.style.background='#22C55E'; showToast('Link copied! 🎉','success'); setTimeout(function(){ btn.textContent='Copy'; btn.style.background='#A855F7'; },2500); };
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(done);
+  else { var el=document.createElement('textarea'); el.value=url; el.style.cssText='position:fixed;opacity:0;'; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el); done(); }
 }
+function shareTwitter() { var url=document.getElementById('page-url').value; window.open('https://twitter.com/intent/tweet?text=Check+out+my+Stackd+page!&url='+encodeURIComponent(url),'_blank'); }
 
-function shareTwitter() {
-  var url = document.getElementById('page-url').value;
-  window.open('https://twitter.com/intent/tweet?text=Check+out+my+Stackd+page!&url=' + encodeURIComponent(url), '_blank');
-}
-
-// ── TOAST ─────────────────────────────────────────────────────
+// ── TOAST ────────────────────────────────────────────────────
 var toastTimer;
 function showToast(msg, type) {
   var t = document.getElementById('toast');
   t.textContent = msg;
-  t.style.background = type === 'error' ? '#EF4444' : type === 'success' ? '#22C55E' : '#fff';
-  t.style.color      = (type === 'error' || type === 'success') ? '#fff' : '#000';
-  t.style.opacity    = '1';
-  t.style.transform  = 'translateX(-50%) translateY(0)';
+  t.style.background = type==='error'?'#EF4444':type==='success'?'#22C55E':'#fff';
+  t.style.color      = (type==='error'||type==='success')?'#fff':'#000';
+  t.style.opacity='1'; t.style.transform='translateX(-50%) translateY(0)';
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(function(){
-    t.style.opacity   = '0';
-    t.style.transform = 'translateX(-50%) translateY(80px)';
-  }, 3200);
+  toastTimer = setTimeout(function(){ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(80px)'; },3200);
 }
 
-// ── INIT ──────────────────────────────────────────────────────
+// ── HELPERS ──────────────────────────────────────────────────
+function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── INIT ─────────────────────────────────────────────────────
 buildThemeGrid();
 renderLinks();
 updatePreview();
 
-// Check for existing session on page load
 (async function() {
   var result = await sb.auth.getSession();
   var session = result.data.session;
@@ -814,7 +816,6 @@ updatePreview();
     await loadPageFromDB();
   }
 })();
-
 </script>
 
 </body>
