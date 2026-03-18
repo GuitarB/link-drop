@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0D0D0D">
+
+  <!-- Dynamic meta tags filled by JS -->
+
+  <title>Stackd</title>
+  <meta id="meta-desc"    name="description"       content="Check out my Stackd page">
+  <meta id="og-title"     property="og:title"       content="Stackd">
+  <meta id="og-desc"      property="og:description" content="Check out my Stackd page">
+  <meta id="og-url"       property="og:url"         content="https://stackd.bio">
+  <meta                   property="og:type"        content="profile">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+    :root {
+      --accent:  #A855F7;
+      --bg:      #0D0D0D;
+      --text:    #FFFFFF;
+      --muted:   rgba(255,255,255,0.5);
+      --font:    'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    html, body {
+      font-family: var(--font);
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LOADING ── */
+    #loading {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: var(--bg); z-index: 100;
+      gap: 1rem;
+      transition: opacity 0.4s;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid rgba(168,85,247,0.2);
+      border-top-color: #A855F7;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-logo {
+      font-size: 1.1rem; font-weight: 800;
+      background: linear-gradient(135deg,#A855F7,#EC4899);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* ── 404 ── */
+    #not-found {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      gap: 1rem;
+    }
+    #not-found.show { display: flex; }
+    .nf-emoji { font-size: 3rem; }
+    .nf-title { font-size: 1.5rem; font-weight: 800; }
+    .nf-sub   { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.6; max-width: 280px; }
+    .nf-btn   {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: linear-gradient(135deg,#A855F7,#EC4899);
+      color: #fff; font-family: var(--font); font-weight: 700;
+      font-size: 0.9rem; padding: 0.75rem 1.5rem;
+      border-radius: 100px; text-decoration: none;
+      margin-top: 0.5rem;
+      box-shadow: 0 4px 20px rgba(168,85,247,0.35);
+    }
+
+    /* ── PAGE WRAPPER ── */
+    #page-wrap {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.25rem calc(2rem + env(safe-area-inset-bottom));
+      position: relative;
+      overflow: hidden;
+    }
+    #page-wrap.show { display: flex; }
+
+    /* Background glow */
+    .bg-glow {
+      position: fixed; top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 500px; height: 400px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    @keyframes glowPulse { 0%,100%{opacity:.2;transform:translateX(-50%) scale(1)} 50%{opacity:.3;transform:translateX(-50%) scale(1.05)} }
+
+    /* ── PROFILE SECTION ── */
+    .profile {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      width: 100%; max-width: 420px;
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(16px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .avatar {
+      width: 88px; height: 88px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .avatar-ring {
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#A855F7,#EC4899);
+      z-index: -1;
+    }
+
+    .profile-name {
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: -0.5px; margin-bottom: 0.4rem;
+    }
+
+    .profile-bio {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      max-width: 280px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── LINKS ── */
+    .links-container {
+      width: 100%; max-width: 420px;
+      display: flex; flex-direction: column;
+      gap: 0.75rem;
+      position: relative; z-index: 1;
+    }
+
+    .link-btn {
+      display: flex; align-items: center; gap: 0.9rem;
+      padding: 1rem 1.25rem;
+      border-radius: 16px;
+      text-decoration: none;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    .link-btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .link-btn:active { transform: translateY(0) scale(0.98); }
+
+    .link-icon  { font-size: 1.3rem; flex-shrink: 0; }
+    .link-label { flex: 1; text-align: left; }
+    .link-arrow { font-size: 0.8rem; opacity: 0.5; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      position: relative; z-index: 1;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+
+    .powered-by {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.75rem; color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .powered-by:hover { color: rgba(255,255,255,0.6); }
+    .powered-by strong {
+      background: linear-gradient(135deg,#A855F7,#EC4899);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-weight: 800;
+    }
+
+    /* ── SHARE BUTTON ── */
+    .share-btn {
+      position: fixed;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom));
+      right: 1.25rem;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      transition: all 0.2s;
+    }
+    .share-btn:hover { background: rgba(255,255,255,0.18); transform: scale(1.05); }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom));
+      left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #fff; color: #000;
+      font-family: var(--font); font-weight: 700; font-size: 0.85rem;
+      padding: 0.72rem 1.4rem; border-radius: 100px;
+      opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 9999; white-space: nowrap;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
+    #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  </style>
+
+</head>
+<body>
+
+<!-- Loading -->
+
+<div id="loading">
+  <div class="loading-logo">Stackd</div>
+  <div class="spinner"></div>
+</div>
+
+<!-- 404 -->
+
+<div id="not-found">
+  <div class="nf-emoji">🔍</div>
+  <div class="nf-title">Page not found</div>
+  <p class="nf-sub">This Stackd page doesn't exist yet. Want to create your own?</p>
+  <a href="/" class="nf-btn">Create your page →</a>
+</div>
+
+<!-- Profile Page -->
+
+<div id="page-wrap">
+  <div class="bg-glow" id="bg-glow"></div>
+
+  <div class="profile">
+    <div class="avatar" id="profile-avatar">
+      <div class="avatar-ring" id="avatar-ring"></div>
+      🌟
+    </div>
+    <div class="profile-name" id="profile-name">Loading...</div>
+    <div class="profile-bio"  id="profile-bio"></div>
+  </div>
+
+  <div class="links-container" id="links-container"></div>
+
+  <div class="page-footer">
+    <a href="/" class="powered-by">
+      Powered by <strong>Stackd</strong> · Create your free page
+    </a>
+  </div>
+</div>
+
+<!-- Share button -->
+
+<button class="share-btn" id="share-btn" onclick="sharePage()" title="Share this page">⬆</button>
+
+<!-- Toast -->
+
+<div id="toast"></div>
+
+<script>
+// ── SUPABASE ─────────────────────────────────────────────────
+const SUPABASE_URL = 'https://yencpkorwedidwbkquqc.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InllbmNwa29yd2VkaWR3YmtxdXFjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjE0NTEsImV4cCI6MjA4OTMzNzQ1MX0.6MsQRtoJbdKSPooEPHgJhhbff_TaPwAQCEfeH0H_Nkg';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── THEMES ───────────────────────────────────────────────────
+const THEMES = {
+  purple: { bg:'#0D0D0D', accent:'#A855F7', text:'#FFFFFF', grad:'135deg,#A855F7,#EC4899',  btnBg:'rgba(168,85,247,0.12)',  btnBorder:'rgba(168,85,247,0.3)'  },
+  cyan:   { bg:'#020F12', accent:'#06B6D4', text:'#F0FFFE', grad:'135deg,#06B6D4,#6366F1',  btnBg:'rgba(6,182,212,0.12)',   btnBorder:'rgba(6,182,212,0.3)'   },
+  lime:   { bg:'#080C00', accent:'#84CC16', text:'#F7FFE0', grad:'135deg,#84CC16,#22C55E',  btnBg:'rgba(132,204,22,0.12)',  btnBorder:'rgba(132,204,22,0.3)'  },
+  rose:   { bg:'#0F0508', accent:'#F43F5E', text:'#FFF0F3', grad:'135deg,#F43F5E,#FB923C',  btnBg:'rgba(244,63,94,0.12)',   btnBorder:'rgba(244,63,94,0.3)'   },
+  indigo: { bg:'#06060F', accent:'#6366F1', text:'#F0F0FF', grad:'135deg,#6366F1,#A855F7',  btnBg:'rgba(99,102,241,0.12)',  btnBorder:'rgba(99,102,241,0.3)'  },
+  amber:  { bg:'#0C0800', accent:'#F59E0B', text:'#FFFBEB', grad:'135deg,#F59E0B,#EF4444',  btnBg:'rgba(245,158,11,0.12)',  btnBorder:'rgba(245,158,11,0.3)'  },
+  teal:   { bg:'#00080A', accent:'#14B8A6', text:'#F0FFFD', grad:'135deg,#14B8A6,#6366F1',  btnBg:'rgba(20,184,166,0.12)',  btnBorder:'rgba(20,184,166,0.3)'  },
+  pink:   { bg:'#0F0008', accent:'#EC4899', text:'#FFF0F8', grad:'135deg,#EC4899,#A855F7',  btnBg:'rgba(236,72,153,0.12)',  btnBorder:'rgba(236,72,153,0.3)'  },
+  orange: { bg:'#0C0400', accent:'#F97316', text:'#FFF7F0', grad:'135deg,#F97316,#EAB308',  btnBg:'rgba(249,115,22,0.12)',  btnBorder:'rgba(249,115,22,0.3)'  },
+  white:  { bg:'#F5F5F5', accent:'#6366F1', text:'#111111', grad:'135deg,#6366F1,#A855F7',  btnBg:'rgba(99,102,241,0.08)',  btnBorder:'rgba(99,102,241,0.25)' },
+};
+
+// ── STATE ────────────────────────────────────────────────────
+var pageData   = null;
+var pageId     = null;
+var pageUserId = null;
+var username   = null;
+
+// ── INIT ─────────────────────────────────────────────────────
+(async function init() {
+  // Get username from URL path e.g. /page.html?u=brian OR /brian
+  username = getUsername();
+
+  if (!username) {
+    showNotFound();
+    return;
+  }
+
+  // Load page data from Supabase
+  var result = await sb
+    .from('pages')
+    .select('id, user_id, page_data')
+    .eq('username', username)
+    .maybeSingle();
+
+  if (result.error || !result.data) {
+    showNotFound();
+    return;
+  }
+
+  pageId     = result.data.id;
+  pageUserId = result.data.user_id;
+  pageData   = result.data.page_data;
+
+  renderPage(pageData);
+})();
+
+// ── GET USERNAME FROM URL ─────────────────────────────────────
+function getUsername() {
+  // Support: /brian  OR  /page.html?u=brian  OR  /?u=brian
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('u')) return params.get('u').toLowerCase().trim();
+
+  // Get from pathname — strip leading slash and .html
+  var path = window.location.pathname
+    .replace(/^\//, '')
+    .replace(/\.html.*$/, '')
+    .trim()
+    .toLowerCase();
+
+  // Ignore index and page itself
+  if (!path || path === 'index' || path === 'page') return null;
+
+  return path;
+}
+
+// ── RENDER PAGE ──────────────────────────────────────────────
+function renderPage(d) {
+  var t = THEMES[d.themeId] || THEMES.purple;
+
+  // Apply theme to page
+  document.body.style.background = d.bgStyle === 'light' ? '#F5F5F5' :
+    d.bgStyle === 'gradient' ? 'linear-gradient(160deg,' + t.bg + ' 0%,' + t.accent + '15 100%)' :
+    t.bg;
+  document.body.style.color = t.text;
+
+  // Background glow color
+  var glow = document.getElementById('bg-glow');
+  if (glow) glow.style.background = t.accent;
+
+  // Avatar ring
+  var ring = document.getElementById('avatar-ring');
+  if (ring) ring.style.background = 'linear-gradient(' + t.grad + ')';
+
+  // Avatar bg
+  var av = document.getElementById('profile-avatar');
+  if (av) {
+    av.textContent   = d.emoji || '🌟';
+    av.style.background = t.bg === '#F5F5F5' ? '#fff' : 'rgba(255,255,255,0.05)';
+    av.style.border  = '3px solid ' + t.accent + '44';
+    // Re-add ring (textContent cleared it)
+    var newRing = document.createElement('div');
+    newRing.className = 'avatar-ring';
+    newRing.style.background = 'linear-gradient(' + t.grad + ')';
+    av.appendChild(newRing);
+  }
+
+  // Name & bio
+  var nameEl = document.getElementById('profile-name');
+  var bioEl  = document.getElementById('profile-bio');
+  if (nameEl) { nameEl.textContent = d.name || username; nameEl.style.color = t.text; }
+  if (bioEl)  { bioEl.textContent  = d.bio  || ''; bioEl.style.color = t.text + '99'; }
+
+  // Update page title & meta
+  var title = (d.name || username) + ' | Stackd';
+  document.title = title;
+  setMeta('meta-desc', d.bio || 'Check out my Stackd page');
+  setMeta('og-title',  title);
+  setMeta('og-desc',   d.bio || 'Check out my Stackd page');
+  setMeta('og-url',    'https://stackd.bio/' + username);
+
+  // Button styles
+  var btnStyle = d.btnStyle || 'pill';
+  var br = btnStyle === 'square' ? '12px' : btnStyle === 'outline' ? '14px' : '100px';
+
+  // Render links
+  var container = document.getElementById('links-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  var links = d.links || [];
+  links.forEach(function(link, i) {
+    var a = document.createElement('a');
+    a.href   = link.url;
+    a.target = '_blank';
+    a.rel    = 'noopener noreferrer';
+    a.className = 'link-btn';
+
+    // Stagger animation
+    a.style.animationDelay = (i * 0.07) + 's';
+
+    // Button styling
+    if (btnStyle === 'outline') {
+      a.style.background   = 'transparent';
+      a.style.border       = '2px solid ' + t.accent;
+      a.style.color        = t.accent;
+    } else {
+      a.style.background   = t.btnBg;
+      a.style.border       = '1px solid ' + t.btnBorder;
+      a.style.color        = t.text;
+    }
+    a.style.borderRadius = br;
+
+    a.innerHTML =
+      '<span class="link-icon">'  + (link.emoji || '🔗') + '</span>' +
+      '<span class="link-label">' + escHtml(link.label)  + '</span>' +
+      '<span class="link-arrow">→</span>';
+
+    // Track click
+    a.addEventListener('click', function() {
+      trackClick(link.label, link.url);
+    });
+
+    container.appendChild(a);
+  });
+
+  // Show page, hide loading
+  hideLoading();
+  document.getElementById('page-wrap').classList.add('show');
+}
+
+// ── CLICK TRACKING ───────────────────────────────────────────
+async function trackClick(label, url) {
+  if (!pageId || !pageUserId) return;
+  try {
+    await sb.from('clicks').insert({
+      page_id:    pageId,
+      user_id:    pageUserId,
+      link_label: label,
+      link_url:   url,
+      referrer:   document.referrer || null,
+      clicked_at: new Date().toISOString(),
+    });
+  } catch(e) {
+    // Silent — never interrupt the visitor
+  }
+}
+
+// ── SHARE ────────────────────────────────────────────────────
+function sharePage() {
+  var url   = 'https://stackd.bio/' + username;
+  var title = (pageData && pageData.name ? pageData.name : username) + "'s Stackd page";
+
+  if (navigator.share) {
+    navigator.share({ title: title, url: url }).catch(function(){});
+  } else {
+    // Fallback: copy to clipboard
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function() {
+        showToast('Link copied! 🎉');
+      });
+    } else {
+      var el = document.createElement('textarea');
+      el.value = url; el.style.cssText = 'position:fixed;opacity:0;';
+      document.body.appendChild(el); el.select();
+      document.execCommand('copy'); document.body.removeChild(el);
+      showToast('Link copied! 🎉');
+    }
+  }
+}
+
+// ── UI HELPERS ───────────────────────────────────────────────
+function hideLoading() {
+  var el = document.getElementById('loading');
+  if (el) { el.classList.add('hidden'); setTimeout(function(){ el.style.display='none'; }, 400); }
+}
+
+function showNotFound() {
+  hideLoading();
+  document.getElementById('not-found').classList.add('show');
+}
+
+function setMeta(id, content) {
+  var el = document.getElementById(id);
+  if (el) el.setAttribute(el.hasAttribute('content') ? 'content' : 'content', content);
+}
+
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+var toastTimer;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+</script>
+
+</body>
+</html>
