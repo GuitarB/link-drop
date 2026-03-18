@@ -782,6 +782,18 @@ function showToast(msg, type) {
 buildThemeGrid();
 renderLinks();
 updatePreview();
+
+// Check for existing session on page load
+(async function() {
+  var result = await sb.auth.getSession();
+  var session = result.data.session;
+  if (session && session.user) {
+    currentUser = session.user;
+    onLoginSuccess();
+    await loadPageFromDB();
+  }
+})();
+
 </script>
 
 </body>
