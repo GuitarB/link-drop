@@ -536,20 +536,41 @@ async function savePage() {
   var username = data.username || ('user_' + currentUser.id.slice(0,8));
   setSaveStatus('Saving...');
 
-  var result = await sb.from('pages').upsert({
-    user_id:   currentUser.id,
-    username:  username,
-    page_data: data,
-    updated_at: new Date().toISOString(),
-  }, { onConflict: 'user_id' });
+  // First check if a row exists
+  var existing = await sb.from('pages')
+    .select('id')
+    .eq('user_id', currentUser.id)
+    .maybeSingle();
+
+  var result;
+  if (existing.data) {
+    // Row exists — update it
+    result = await sb.from('pages')
+      .update({
+        username:   username,
+        page_data:  data,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('user_id', currentUser.id);
+  } else {
+    // No row yet — insert fresh
+    result = await sb.from('pages')
+      .insert({
+        user_id:    currentUser.id,
+        username:   username,
+        page_data:  data,
+        updated_at: new Date().toISOString(),
+      });
+  }
 
   if (result.error) {
     setSaveStatus('Save failed ✗');
-    console.error('Save error:', result.error);
+    console.error('Save error:', result.error.message);
   } else {
     setSaveStatus('All changes saved ✓');
   }
 }
+
 
 async function loadPageFromDB() {
   if (!currentUser) return;
